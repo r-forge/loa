@@ -4,20 +4,19 @@ year <- sub("-.*", "", meta$Date)
 version <- meta$Version
 note <- sprintf("R package version %s", version) 
 
-citEntry(entry="Manual",
+bibentry(bibtype="Manual",
          title = "loa: various plots, options and add-ins for use with lattice.",
-         author = personList(as.person("Karl Ropkins")),
+         author = c(as.person("Karl Ropkins")),
          year = year,
          note = note,
-
          textVersion =
          paste("Karl Ropkins (", year,
                "). loa: various plots, options and add-ins for use with lattice. ",
                "R package version ", version, ".", sep=""))
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
   title        = "{RgoogleMaps} and {loa}: Unleashing {R} Graphics Power on Map Tiles",
-  author       = personList(as.person("Markus Loecher"),
+  author       = c(as.person("Markus Loecher"),
                    as.person("Karl Ropkins")),
   journal      = "Journal of Statistical Software",
   year         = "2015",
@@ -33,9 +32,9 @@ citEntry(entry = "Article",
         "https://www.jstatsoft.org/article/view/v063i04.")
         )
 
-citEntry(entry="proceedings",
+bibentry(bibtype="proceedings",
          title = "R, lattice and RgoogleMaps: A practical framework for the development of new geovisualizations.",
-         author = personList(as.person("Karl Ropkins"),
+         author = c(as.person("Karl Ropkins"),
                              as.person("David C. Carslaw"),
                              as.person("Said Munir"),
                              as.person("Haibo Chen")),
@@ -44,7 +43,6 @@ citEntry(entry="proceedings",
 
          textVersion = "Karl Ropkins, David C. Carslaw, Said Munir and Haibo Chen (2012). R, lattice and RgoogleMaps: A practical framework for the development of new geovisualizations. Invited paper for Special Session on Statistical Graphics, American Statistical Association (ASA) 2012 Joint Statistical Meeting, San Diego, US, 29 July - 2 August, 2012."
          )
-
 
 citFooter("Please cite both 'loa' and R ",
           "when using 'loa' for data analysis.",
