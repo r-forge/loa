@@ -2,7 +2,7 @@ Package: loa
 Type: Package
 Title: Lattice Options and Add-Ins
 Version: 0.2.48.2
-Date: 2023-1019-15
+Date: 2023-10-19
 Authors@R: c(person(given = "Karl", family = "Ropkins", role = c("aut", "cre"), email =
          "karl.ropkins@gmail.com", comment = c(ORCID = "0000-0002-0294-6997")))
 URL: http://loa.r-forge.r-project.org/loa.intro.html
@@ -16,4 +16,4 @@ Imports: methods, MASS, grid, png, RgoogleMaps, OpenStreetMap, sp, RColorBrewer,
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
