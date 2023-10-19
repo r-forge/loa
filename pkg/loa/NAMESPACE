@@ -23,6 +23,7 @@ import(OpenStreetMap)
 import(RColorBrewer)
 import(mgcv)
 import(plyr)
+import(sf)
 
 #single imports
 
