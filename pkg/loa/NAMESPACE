@@ -23,7 +23,6 @@ import(OpenStreetMap)
 import(RColorBrewer)
 import(mgcv)
 import(plyr)
-import(rgdal)
 
 #single imports
 
