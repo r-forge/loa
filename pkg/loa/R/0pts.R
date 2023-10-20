@@ -15,7 +15,8 @@ options("rgdal_show_exportToProj4_warnings"="none")
 
 #example
 #globalVariables(c("hasGroupNumber"))
-
+globalVariables(c("MaxZoom", "MapBackground", "GetMap.bbox", "GetMap", 
+                  "qbbox"))
 
 #setup
 

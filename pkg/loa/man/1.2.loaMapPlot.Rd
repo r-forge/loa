@@ -131,7 +131,7 @@
   \item{ylim, xlim, lim.borders, lim}{The latitude and longitude plot ranges. 
    \code{ylim} and \code{xlim} are only required by \code{get} functions, which 
    use these to set the requested map size. The additional argument 
-   \code{lim.borders}, sets the borders to be added. The default code{0.1} adds 
+   \code{lim.borders}, sets the borders to be added. The default \code{0.1} adds 
    a 10\% border to both axes, while two-element vectors allow provide separate 
    control of the axes. For the axis handlers (\code{yscale...} and \code{xscale...}) 
    the local alternative \code{lim} is used for both \code{ylim} and \code{xlim} in 

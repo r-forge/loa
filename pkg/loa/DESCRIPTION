@@ -12,7 +12,8 @@ Description: Various plots and functions that make use of the lattice/trellis pl
    extends 'lattice' and 'hexbin' package methods to automate plot subscript and panel-to-panel 
    and panel-to-key synchronization/management.   
 Depends: R (>= 3.5.0), lattice
-Imports: methods, MASS, grid, png, RgoogleMaps, OpenStreetMap, sp(>= 2.1-1), RColorBrewer, mgcv, plyr, sf
+Imports: methods, MASS, grid, png, RgoogleMaps, OpenStreetMap, sp(>= 2.1-1), RColorBrewer, mgcv, plyr 
+Suggests: sf
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: yes
