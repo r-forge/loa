@@ -1,3 +1,7 @@
+Changes in loa 0.2.49 [2024-06-17]
+
+*       draw.loaKey02 fix, | not || (oh, how we laughed...) 
+
 Changes in loa 0.2.48 [2023-10-19]
 
 *       requested changes to geo functions 

@@ -1455,7 +1455,16 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
             h.ref <- grepl("h", my.type)
             h.lty <- z$lty
             h.lty[!h.ref] <- 0
-            temp <- ifelse(is.na(h.lty) || h.lty==0, 0, 1.5)
+##################
+# test fix 
+##################
+            # was # temp <- ifelse(is.na(h.lty) || h.lty==0, 0, 1.5)
+            ## temp <- h.lty 
+            ## temp[is.na(temp)] <- 0
+            ## temp[temp!=0] <- 1.5
+            temp <- ifelse(is.na(h.lty) | h.lty == 0, 0, 1.5)
+            # also at 1671 and 1871
+###################
 # print("this")
 # print(temp)
             my.y[seq(1, length(my.y), by=2)] <- my.y[seq(1, length(my.y), by=2)] + temp
@@ -1659,7 +1668,7 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
         h.ref <- grepl("h", my.type)
         h.lty <- groups$lty
         h.lty[!h.ref] <- 0
-        temp <- ifelse(is.na(h.lty) || h.lty==0, 0, 1.5)
+        temp <- ifelse(is.na(h.lty) | h.lty==0, 0, 1.5)
  #   print("this")
  #   print(temp)
         my.y[seq(1, length(my.y), by=2)] <- my.y[seq(1, length(my.y), by=2)] + temp
@@ -1866,7 +1875,7 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
             h.ref <- grepl("h", my.type)
             h.lty <- zcases$lty
             h.lty[!h.ref] <- 0
-            temp <- ifelse(is.na(h.lty) || h.lty==0, 0, 1.5)
+            temp <- ifelse(is.na(h.lty) | h.lty==0, 0, 1.5)
 #            print("this")
 #            print(temp)
             my.y[seq(1, length(my.y), by=2)] <- my.y[seq(1, length(my.y), by=2)] + temp
