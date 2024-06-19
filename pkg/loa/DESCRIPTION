@@ -1,8 +1,8 @@
 Package: loa
 Type: Package
 Title: Lattice Options and Add-Ins
-Version: 0.2.49.0
-Date: 2024-06-17
+Version: 0.2.49.1
+Date: 2024-06-19
 Authors@R: c(person(given = "Karl", family = "Ropkins", role = c("aut", "cre"), email =
          "karl.ropkins@gmail.com", comment = c(ORCID = "0000-0002-0294-6997")))
 URL: http://loa.r-forge.r-project.org/loa.intro.html
@@ -18,4 +18,4 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
