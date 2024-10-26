@@ -28,7 +28,7 @@
 
   loaMapPlot(x, data = NULL, panel = panel.loaPlot, map = NULL, 
         map.panel = panel.loaBGMapPlotRaster, recolor.map = FALSE, 
-        show.axes = FALSE, ..., map.source = getRGMapArg, 
+        show.axes = FALSE, ..., map.source = getOSMapArg, 
         lon.lat = FALSE)
 
   RgoogleMapsPlot(x, data = NULL, ...)
@@ -168,7 +168,7 @@
   \code{getMap...} functions accept latitude and longitude ranges and 
    related \code{RgoogleMaps} or \code{OpenStreetMap} function arguments, 
    and produces an output suitable for use as the \code{map} argument in 
-   subsequent (same area) \code{MatPlot}s or in \code{panel.loaBGMapPlotRaster} 
+   subsequent (same area) \code{MapPlot}s or in \code{panel.loaBGMapPlotRaster} 
    or \code{panel.loaBGMapPlot} panel function calls.
    
   \code{LatLon2MercatorXY} converts supplied latitude and longitude time-series 

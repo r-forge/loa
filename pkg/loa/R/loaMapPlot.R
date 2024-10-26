@@ -27,7 +27,7 @@
 loaMapPlot <- function(x, data = NULL, panel = panel.loaPlot, map = NULL, 
                       map.panel = panel.loaBGMapPlotRaster, 
                       recolor.map = FALSE, show.axes = FALSE, 
-                      ..., map.source = getRGMapArg, lon.lat = FALSE){
+                      ..., map.source = getOSMapArg, lon.lat = FALSE){
   
   extra.args <- list(...)
   
