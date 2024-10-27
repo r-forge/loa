@@ -39,10 +39,10 @@ getLatLon(...,
   \item{...}{ Additional arguments, passed on to related functions.
 
    These may be subject to revision, but are currently: 
-   \code{\link{trellis.focus}} for panel selection (if working with multi-panel 
-   plots) and \code{\link{lpoints}} to set point properties (if marking selected 
+   \code{\link[lattice]{trellis.focus}} for panel selection (if working with multi-panel 
+   plots) and \code{\link[lattice]{lpoints}} to set point properties (if marking selected 
    points). For \code{getLatLon}, additional arguments are also passed to 
-   \code{\link{XY2LatLon}} for x, y to latitude, longitude rescaling.
+   \code{\link[RgoogleMaps]{XY2LatLon}} for x, y to latitude, longitude rescaling.
  
   } 
 
@@ -56,9 +56,9 @@ getLatLon(...,
   stop to end point collection; escape to abort without 
   returning any values). 
 
-  It is a wrapper for the \code{\link{grid}} function 
-   \code{\link{grid.locator}} that behaves more like 
-   \code{\link{locator}}, the equivalent function intended 
+  It is a wrapper for the \code{grid} function 
+   \code{\link[grid]{grid.locator}} that behaves more like 
+   \code{\link[graphics]{locator}}, the equivalent function intended 
    for use with \code{\link{plot}} outputs. 
 
   By default \code{getXY} selections are not automatically 
@@ -141,8 +141,8 @@ getLatLon(...,
 }
 
 \seealso{
-   In other packages: See \code{\link{grid.locator}}; 
-   \code{\link{trellis.focus}} and \code{\link{lpoints}} in \code{\link{lattice}}.    
+   In other packages: See \code{\link[grid]{grid.locator}}; 
+   \code{\link[lattice]{trellis.focus}} and \code{\link[lattice]{lpoints}} in \code{\link[lattice]{lattice}}.    
 }
 
 

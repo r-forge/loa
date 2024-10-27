@@ -101,7 +101,7 @@ loaPieSegment(..., polygon = NULL, start = 0,
 %}
 
 \seealso{
-   In other packages: See \code{\link{lrect}}, and similar, in \code{\link{lattice}} 
+   In other packages: See \code{\link[lattice]{lrect}}, and similar, in \code{\link[lattice]{lattice}} 
 }
 
 

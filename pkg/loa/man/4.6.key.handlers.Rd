@@ -74,7 +74,7 @@ draw.key.log10(key = NULL, draw = FALSE, vp = NULL, ...)
   \code{\link{loaPlot}}.
 
   \code{draw.loaColorKey} and \code{draw.loaColorRegionsKey} are variations 
-  on the \code{draw.colorkey} function in \code{\link{lattice}}.
+  on the \code{draw.colorkey} function in \code{\link[lattice]{lattice}}.
 
   \code{draw.zcasePlotKey}, \code{draw.ycasePlotKey} and \code{draw.groupPlotKey} 
   are simple legends based on \code{zcase}, \code{ycase} and \code{group} 
@@ -121,7 +121,7 @@ draw.key.log10(key = NULL, draw = FALSE, vp = NULL, ...)
 }
 
 \seealso{
-   In other packages: See \code{\link{xyplot}} in \code{\link{lattice}}. 
+   In other packages: See \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}. 
 }
 
 %\examples{

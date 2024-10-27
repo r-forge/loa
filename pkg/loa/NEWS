@@ -1,4 +1,4 @@
-Changes in loa 0.2.49 [2024-10-25]
+Changes in loa 0.2.49 [2024-10-26]
 
 *       draw.loaKey02 fix, | not || (oh, how we laughed...) 
 *       loaMapPlot, now using OSM by default  

@@ -116,14 +116,14 @@ panel.binPlot(x = NULL, y = NULL, z = NULL,
 \details{
 
    \code{panel.loaLevelPlot} is intended for plot data structured 
-   for use with the \code{\link{lattice}} function \code{\link{levelplot}}, 
+   for use with the \code{\link[lattice]{lattice}} function \code{\link[lattice]{levelplot}}, 
    e.g. regularised \code{(x,y,z)} or a \code{matrix}:
 
    \code{loaPlot(..., panel = panel.loaLevelPlot)}\cr
    \code{levelplot(...) #in lattice}\cr
     
    Other specialist \code{panel...} functions can be used with the 
-   \code{\link{lattice}} function \code{\link{xyplot}}:
+   \code{\link[lattice]{lattice}} function \code{\link[lattice]{xyplot}}:
  
    \code{xyplot(..., panel = panel.kernelDensity)}\cr
    \code{xyplot(..., n = 50, panel = panel.kernelDensity)}\cr
@@ -224,7 +224,7 @@ panel.binPlot(x = NULL, y = NULL, z = NULL,
    function \code{panel.levelplot} to generate the associated plot. 
    If no \code{kernel.fun} is supplied in the \code{panel} call, the 
    \code{stats} function \code{loess} is used to estimate surface smooth.
-   The \code{too.far} argument is based on same in \code{\link{vis.gam}} 
+   The \code{too.far} argument is based on same in \code{\link[mgcv]{vis.gam}} 
    function in the \code{mgcv} package.
 
   \code{panel.kernelDensity} passes additional arguments on to the 
@@ -244,8 +244,9 @@ panel.binPlot(x = NULL, y = NULL, z = NULL,
 
    In \code{loa}: \code{\link{panelPal}}
 
-   In \code{\link{lattice}}: \code{\link{xyplot}}, \code{\link{levelplot}}, 
-   \code{\link{panel.contourplot}}, \code{\link{lrect}} 
+   In \code{\link[lattice]{lattice}}: \code{\link[lattice]{xyplot}}, 
+   \code{\link[lattice]{levelplot}}, 
+   \code{\link[lattice]{panel.contourplot}}, \code{\link[lattice]{lrect}} 
 
 }
 

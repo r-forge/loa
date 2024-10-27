@@ -144,7 +144,7 @@ isGood4LOA(arg)
   any arg that has previously been tagged as 'not wanted'.
 
   \code{parHandler} returns a list a list suitable for use as 
-  \code{par.settings} with most \code{\link{lattice}} plots. 
+  \code{par.settings} with most \code{\link[lattice]{lattice}} plots. 
    
 }
 
@@ -188,7 +188,7 @@ isGood4LOA(arg)
 }
 
 \seealso{
-   In other packages: See \code{\link{xyplot}} in \code{\link{lattice}}.
+   In other packages: See \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}.
 }
 
 \examples{

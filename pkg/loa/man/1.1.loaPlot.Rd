@@ -43,8 +43,8 @@
 \arguments{
 
   \item{x}{ A formula with the general structure 
-   \code{z ~ x * y | cond} applied like in the \code{\link{lattice}} 
-   function \code{\link{levelplot}} or a matrix. For a formula, \code{x} 
+   \code{z ~ x * y | cond} applied like in the \code{\link[lattice]{lattice}} 
+   function \code{\link[lattice]{levelplot}} or a matrix. For a formula, \code{x} 
    and \code{y} are the horizontal and vertical axes, \code{z} is any 
    additional information to be used in point, symbol, surface or glyph 
    generation, and \code{cond} is any additional conditioning to be applied. 
@@ -58,7 +58,7 @@
    }
 
   \item{panel}{ \code{panel} is the function to be used when generating 
-   the content of the individual panels within the \code{\link{lattice}} 
+   the content of the individual panels within the \code{\link[lattice]{lattice}} 
    plot. By default, this is the \code{loa} panel function \code{panel.loaPlot}. 
    }
 
@@ -126,8 +126,8 @@
 
   \code{loaPlot} provides lattice-style conditioning/handling for a range of 
    commonly used XYZ plotting options. It is perhaps easiest pictured as a 
-   'mid point' alternative somewhere between the standard \code{\link{lattice}} 
-   plot functions \code{\link{xyplot}} and \code{\link{levelplot}}.
+   'mid point' alternative somewhere between the standard \code{\link[lattice]{lattice}} 
+   plot functions \code{\link[lattice]{xyplot}} and \code{\link[lattice]{levelplot}}.
 
    The default form of the plot uses an extension of the subscripting methods 
    described by Deepayan Sarkar in Chapter 5 of Lattice (see sections on 
@@ -181,7 +181,7 @@
 
    In other packages, see
 
-   \code{\link{lattice}}: \code{\link{xyplot}}; and \code{\link{levelplot}}.
+   \code{\link[lattice]{lattice}}: \code{\link[lattice]{xyplot}}; and \code{\link[lattice]{levelplot}}.
 
 }
 

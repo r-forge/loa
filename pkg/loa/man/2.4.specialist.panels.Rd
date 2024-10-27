@@ -74,7 +74,7 @@ panel.compareZcases(x=x, y=y, z=NULL, ...,
 
    In \code{loa}: \code{\link{loaPlot}}, \code{\link{panelPal}}.
 
-   In other packages: \code{\link{xyplot}} in \code{\link{lattice}}.
+   In other packages: \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}.
 }
 
 %examples to do

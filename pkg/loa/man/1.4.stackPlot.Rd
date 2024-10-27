@@ -117,7 +117,8 @@
 
    In \code{loa}: \code{\link{loaPlot}} and \code{\link{panelPal}}. 
 
-   In other packages: \code{\link{xyplot}} and \code{\link{panel.polygon}}  in \code{\link{lattice}}. 
+   In other packages: \code{\link[lattice]{xyplot}} and 
+   \code{\link[lattice]{panel.polygon}}  in \code{\link[lattice]{lattice}}. 
 
 }
 

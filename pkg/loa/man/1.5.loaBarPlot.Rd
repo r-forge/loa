@@ -105,7 +105,7 @@
 
    In \code{loa}: \code{\link{listUpdate}} and \code{\link{colHandler}}. 
 
-   In other packages: \code{\link{barchart}} in \code{\link{lattice}}. 
+   In other packages: \code{\link[lattice]{barchart}} in \code{\link[lattice]{lattice}}. 
 
 }
 

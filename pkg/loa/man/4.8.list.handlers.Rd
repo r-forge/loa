@@ -116,7 +116,7 @@ listLoad(..., load = NULL)
 }
 
 \seealso{
-   \code{\link{lattice}}, \code{\link{xyplot}}, 
+   \code{\link[lattice]{lattice}}, \code{\link[lattice]{xyplot}}, 
 }
 
 \examples{

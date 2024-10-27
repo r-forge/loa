@@ -162,7 +162,7 @@ xscale.component.log10(...)
 }
 
 \seealso{
-   In other packages: \code{\link{xyplot}} in \code{\link{lattice}}.
+   In other packages: \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}.
 }
 
 \examples{

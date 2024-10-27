@@ -101,7 +101,7 @@
 
    For example, for \code{loaPlot} it assumes the general formula structure 
    \code{z ~ x * y | cond}, and applies it in a similar fashion to the 
-   \code{\link{lattice}} function \code{\link{levelplot}}. 
+   \code{\link[lattice]{lattice}} function \code{\link[lattice]{levelplot}}. 
 
    Within the formula part of the plot call \code{x} and \code{y} are the 
    horizontal and vertical axes, \code{z} is any additional information to be 
@@ -176,7 +176,7 @@
   \code{z1 + z2 + etc ~ x * y} rather than \code{z ~ x * y}.
 
   The current version of \code{matrixHandler} is based on code from 
-  levelplot.matrix in \code{\link{lattice}}. If used with \code{x} and 
+  levelplot.matrix in \code{\link[lattice]{lattice}}. If used with \code{x} and 
   \code{data} arguments it will overwrite \code{data} with the matrix 
   content.     
      
@@ -201,7 +201,7 @@
 
    In loa: \code{\link{loaPlot}}; \code{\link{panelPal}}
 
-   In other packages: \code{\link{levelplot}} in \code{\link{lattice}}.
+   In other packages: \code{\link[lattice]{levelplot}} in \code{\link[lattice]{lattice}}.
 
 }
 

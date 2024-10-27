@@ -156,8 +156,9 @@
 
    For information on related functions in other packages, see
 
-   \code{\link{lattice}}: \code{\link{xyplot}}; \code{\link{panel.xyplot}}; and 
-   \code{\link{panel.levelplot}}.
+   \code{\link[lattice]{lattice}}: \code{\link[lattice]{xyplot}}; 
+   \code{\link[lattice]{panel.xyplot}}; and 
+   \code{\link[lattice]{panel.levelplot}}.
 
 }
 

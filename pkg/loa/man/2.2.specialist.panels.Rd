@@ -158,7 +158,7 @@ panel.polarLabels(labels.theta = NULL, labels.r = NULL,
 
    In \code{loa}: \code{\link{loaPlot}}; and \code{\link{panelPal}}.
 
-   In other packages: \code{\link{xyplot}} in \code{\link{lattice}}.
+   In other packages: \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}.
 }
 
 

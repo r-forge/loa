@@ -347,7 +347,7 @@
    In \code{loa}: For in-panel axis/scale generation, see \code{\link{loaPlot}}, \code{\link{panelPal}}, 
    \code{\link{localScalesHandler}} and \code{\link{panel.localScale}}. 
 
-   In other packages: \code{\link{xyplot}} in \code{\link{lattice}}. 
+   In other packages: \code{\link[lattice]{xyplot}} in \code{\link[lattice]{lattice}}. 
 
 }
 

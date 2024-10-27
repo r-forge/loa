@@ -7,20 +7,20 @@
 }
 \description{
   The loa package contains various plots, options and 
-  add-ins for use with the \code{\link{lattice}} package.  
+  add-ins for use with the \code{\link[lattice]{lattice}} package.  
   
 }
 \details{
 \tabular{ll}{
 Package: \tab loa\cr
 Type: \tab Package\cr
-Version: \tab 0.2.49.2\cr
-Date: \tab 2024-10-25\cr
+Version: \tab 0.2.49.4\cr
+Date: \tab 2024-10-26\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
 
-\code{\link{lattice}} provides an elegant and highly powerful implementation 
+\code{\link[lattice]{lattice}} provides an elegant and highly powerful implementation 
 of the Trellis plotting structure described by Cleveland and colleagues. 
 In particular the combination of \code{panel...} functions, which can be 
 layered within plots to generate novel visualisations, and simple-to-use 
@@ -55,7 +55,7 @@ the comparison of different data handling strategies.
 
 Therefore, the functions in this package have been written in a relatively dissaggregated 
 fashion so code can be easily rearranged or modified by others to quickly develop 
-alternative plots within the \code{\link{lattice}} framework. Firstly, plot functions 
+alternative plots within the \code{\link[lattice]{lattice}} framework. Firstly, plot functions 
 in section 1 have where possible been supplied as main plot functions and plot component 
 functions that handle data, axes, panels, etc. Secondly, the workhorse functions, those common 
 functions used through-out the package to simplify many routine operations have been grouped 
@@ -114,7 +114,7 @@ Karl Ropkins <k.ropkins@its.leeds.ac.uk>
 \keyword{ package }
 
 \seealso{
-  \code{\link{loaPlot}}, \code{\link{GoogleMap}}, \code{\link{trianglePlot}}
+  \code{\link{loaPlot}}, \code{\link{loaMapPlot}}, \code{\link{trianglePlot}}
 }
 
 %\examples{
