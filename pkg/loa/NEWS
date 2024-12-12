@@ -1,15 +1,26 @@
-Changes in loa 0.2.49 [2024-10-26]
+Changes in loa 0.3.0 [2024-12-11]
+==================================
 
+*       Moved lattice from depends to imports 
+
+
+Changes in loa 0.2.49 [2024-12-11]
+==================================
+
+*       panel.loaPlot fix 
 *       draw.loaKey02 fix, | not || (oh, how we laughed...) 
 *       loaMapPlot, now using OSM by default  
+*       documentation update  
 
 Changes in loa 0.2.48 [2023-10-19]
+==================================
 
 *       requested changes to geo functions 
 *       requested change to citation and description 
         documentation  
 
 Changes in loa 0.2.47 [2021-04-10]
+==================================
 
 *       loaPlot updated, now accepts factors as  
         x, y, z terms 
@@ -17,6 +28,7 @@ Changes in loa 0.2.47 [2021-04-10]
 
 
 Changes in loa 0.2.46 [2020-12-30]
+==================================
 
 *       added panel.loa and drawkey.loaKey02,
         type="l" and "h" handler for loaPlot
@@ -26,6 +38,7 @@ Changes in loa 0.2.46 [2020-12-30]
 
 
 Changes in loa 0.2.45 [2019-09-11]
+==================================
 
 *       added loaMapPlot as generic map plot 
 *       replaced existing makeMap...,  

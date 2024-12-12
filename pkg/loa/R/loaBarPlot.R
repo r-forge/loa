@@ -132,7 +132,7 @@ loaBarPlot <- function(x, y=NULL, groups=NULL, cond=NULL, data=NULL, ...,
                               factor(df$cond, exclude=FALSE)
 
 
-      sum.df <- ddply(df, names(df)[names(df) !="y"], function(df) stat(df$y), .drop=drop.nas)
+      sum.df <- plyr::ddply(df, names(df)[names(df) !="y"], function(df) stat(df$y), .drop=drop.nas)
       if(drop.nas){
           sum.df <- na.omit(sum.df)
       } else {
@@ -181,8 +181,8 @@ loaBarPlot <- function(x, y=NULL, groups=NULL, cond=NULL, data=NULL, ...,
 #                                   text = list(grps),
 #                                   rect = list(col=col)),
                         panel = function(...){
-                                 panel.grid(-1,-1)
-                                 panel.barchart(...)
+                                 lattice::panel.grid(-1,-1)
+                                 lattice::panel.barchart(...)
                         })
 
 ##############
@@ -204,7 +204,7 @@ loaBarPlot <- function(x, y=NULL, groups=NULL, cond=NULL, data=NULL, ...,
       extra.args <- do.call(scalesHandler, extra.args)
       extra.args <- listUpdate(plot.list, extra.args)
 
-      plt <- do.call(barchart, extra.args)
+      plt <- do.call(lattice::barchart, extra.args)
 
       if(!is.null(sum.df$groups)){
 ############################
@@ -226,7 +226,7 @@ loaBarPlot <- function(x, y=NULL, groups=NULL, cond=NULL, data=NULL, ...,
 #                         draw=FALSE))
 #tider key using own function
 
-            temp <- list(fun="draw.zcasePlotKey",
+            temp <- list(fun=draw.zcasePlotKey,
                          args=list(key=list( 
                                    space="right", adj=1,
                                    zcases.main=if("key.main" %in% names(extra.args)) 
@@ -274,7 +274,8 @@ loaBarPlot.new <- function (x, data = NULL, ...){
    do.call(loaPlot, extra.args)
 }
 
-XZ2XYZ <- function(col=NULL, col.regions=NULL, par.settings=NULL, scheme=NULL, border=NULL, key.handling = NULL, force.key=NULL,...){
+XZ2XYZ <- function(col=NULL, col.regions=NULL, par.settings=NULL, 
+                   scheme=NULL, border=NULL, key.handling = NULL, force.key=NULL,...){
    
    #this is from stackPlot
    
@@ -332,7 +333,8 @@ XZ2XYZ <- function(col=NULL, col.regions=NULL, par.settings=NULL, scheme=NULL, b
    #need to look into why include par.settings = NULL 
    #stop colHandler looking at scheme
    
-   extra.args$col <- colHandler(z=cols, ref=cols, col=col, col.regions=col.regions, scheme=scheme)
+   extra.args$col <- colHandler(z=cols, ref=cols, col=col, 
+                                col.regions=col.regions, scheme=scheme)
    if(is.null(border))
       extra.args$border <- extra.args$col
    

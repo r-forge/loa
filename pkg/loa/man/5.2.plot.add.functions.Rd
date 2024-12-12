@@ -16,20 +16,20 @@
 
 \usage{
 
-add.XYZGhosts(object = trellis.last.object(), 
+add.XYZGhosts(object = NULL, 
               ..., unit = "native", 
               ghost.panel = panel.loaPlot) 
 
-add.Y2Axis(object = trellis.last.object(), 
+add.Y2Axis(object = NULL, 
               ..., unit = "native", 
               rescale = NULL) 
 
-add.XYPolygon(object = trellis.last.object(),
+add.XYPolygon(object = NULL,
               x = NULL, y = NULL, data = NULL,
               ..., unit = "native",
               y2.scale=FALSE, first=FALSE)
 
-add.LonLatMap(object = trellis.last.object(),
+add.LonLatMap(object = NULL,
               ..., map = NULL, recolor.map=FALSE,
               show.axes = FALSE, unit = "native",
               first = TRUE)

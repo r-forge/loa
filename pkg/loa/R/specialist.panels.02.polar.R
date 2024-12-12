@@ -324,7 +324,7 @@ panel.polarGrid <- function(grid.theta = NULL, grid.r = NULL,
         y <- r * cos(pi * theta/180)
         temp <- listUpdate(list(x=x, y=y, col="green"), theta.par)
         temp$col.line <- temp$col
-        do.call(panel.lines, temp)
+        do.call(lattice::panel.lines, temp)
     }
 
 ##minor origin fix
@@ -338,7 +338,7 @@ panel.polarGrid <- function(grid.theta = NULL, grid.r = NULL,
         y <- r * cos(pi * theta/180)
         temp <- listUpdate(list(x=x, y=y, col="grey"), r.par)
         temp$col.line <- temp$col
-        do.call(panel.lines, temp)
+        do.call(lattice::panel.lines, temp)
     }
 
 }
@@ -407,7 +407,7 @@ panel.polarLabels <- function(labels.theta = NULL, labels.r = NULL,
         y <- labels.r * cos(pi * theta/180)
         temp <- listUpdate(list(x=x, y=y, labels=labels.r), theta.par)
         temp$col.line <- temp$col
-        do.call(panel.text, temp)
+        do.call(lattice::panel.text, temp)
     }
 
 }

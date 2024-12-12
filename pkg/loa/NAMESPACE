@@ -16,13 +16,13 @@
 
 import(lattice)
 
-import(grid)
-import(png)
-import(RgoogleMaps)
-import(OpenStreetMap)
-import(RColorBrewer)
-import(mgcv)
-import(plyr)
+#import(grid)
+#import(png)
+#import(RgoogleMaps)
+#import(OpenStreetMap)
+#import(RColorBrewer)
+#import(mgcv)
+#import(plyr)
 
 #single imports
 

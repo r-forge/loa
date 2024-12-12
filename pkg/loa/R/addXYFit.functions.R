@@ -39,10 +39,14 @@
 #not sure about use and ignore
 #might not be staying
 
-add.loaPanel <- function (lattice.plot = trellis.last.object(), preprocess = NULL, 
+add.loaPanel <- function (lattice.plot = NULL, 
+                          preprocess = NULL, 
                           panel = NULL, postprocess = NULL, ...,
                           use = NULL, ignore = NULL) 
 {
+  if(is.null(lattice.plot)){
+    lattice.plot <- lattice::trellis.last.object()
+  }
   x.args <- list(...)
   if (!is.null(preprocess)) 
     lattice.plot <- do.call(preprocess, listUpdate(x.args, 
@@ -72,9 +76,12 @@ add.loaPanel <- function (lattice.plot = trellis.last.object(), preprocess = NUL
 #addXYLMFit
 ###################
 
-add.XYLMFit <- function(lattice.plot = trellis.last.object(),
+add.XYLMFit <- function(lattice.plot = NULL,
                       preprocess = add.XYFit_prep,
                       panel = panel.loaXYFit, ...){
+  if(is.null(lattice.plot)){
+    lattice.plot <- lattice::trellis.last.object()
+  }
   x.args <- list(lattice.plot = lattice.plot, ...,
                preprocess = preprocess, panel=panel)
   x.args$grid <- FALSE
@@ -86,10 +93,13 @@ add.XYLMFit <- function(lattice.plot = trellis.last.object(),
 # add.XYLOESSFit
 ####################
 
-add.XYLOESSFit <- function(lattice.plot=trellis.last.object(),
+add.XYLOESSFit <- function(lattice.plot=NULL,
                       preprocess = add.XYFit_prep,
                       model.method = loaXYFit_loess,
                       panel = panel.loaXYFit, ...){
+  if(is.null(lattice.plot)){
+    lattice.plot <- lattice::trellis.last.object()
+  }
   x.args <- list(lattice.plot = lattice.plot, ...,
                  model.method = model.method,
                  preprocess = preprocess, panel=panel)
@@ -103,10 +113,12 @@ add.XYLOESSFit <- function(lattice.plot=trellis.last.object(),
 #add.XYFit_prep
 #########################
 
-add.XYFit_prep <- function(lattice.plot=trellis.last.object(),
+add.XYFit_prep <- function(lattice.plot=NULL,
                               model.method=loaXYFit_lm,
                              ...){
-  
+  if(is.null(lattice.plot)){
+    lattice.plot <- lattice::trellis.last.object()
+  }
   common <- lattice.plot$panel.args.common
   #tidy group/zcase args
   if(!"group.ids" %in% names(common)){
@@ -335,7 +347,7 @@ panel.loaXYFit <- function(...){
     formulas <- c("Fit", report.mod.form)
     r2 <- c(NA, report.mod.r2)
     r2[1] <- expression(paste("(", R^2, ")",sep=""))
-    key.gf <- draw.key(list(lines=lines,
+    key.gf <- lattice::draw.key(list(lines=lines,
                     text=list(formulas,
                               cex=0.65),
                     text=list(r2, cex=0.65),
@@ -343,15 +355,15 @@ panel.loaXYFit <- function(...){
                 border=1, background="white"), 
                 draw = FALSE)
     #key.gf <- draw.key(list(lines=TRUE), draw=FALSE)
-    vp <- viewport(x = unit(m.args$position[1], "npc") + 
-                     unit(0.5 - m.args$position[1], 
+    vp <- grid::viewport(x = grid::unit(m.args$position[1], "npc") + 
+                           grid::unit(0.5 - m.args$position[1], 
                      "grobwidth", list(key.gf)), 
-                   y = unit(m.args$position[2], "npc") + 
-                      unit(0.5 - m.args$position[2], 
+                   y = grid::unit(m.args$position[2], "npc") + 
+                     grid::unit(0.5 - m.args$position[2], 
                       "grobheight", list(key.gf)))
-    pushViewport(vp)
-    grid.draw(key.gf)
-    upViewport()
+    grid::pushViewport(vp)
+    grid::grid.draw(key.gf)
+    grid::upViewport()
   }
 }
 

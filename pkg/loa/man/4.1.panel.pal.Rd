@@ -187,6 +187,8 @@ loaHandler(panel = NULL,...)
 ## structured panel... functions provides 
 ## several additional plot features:
 
+require(lattice)
+
 ## example 1
 ## plot management from the panel... functions.
 

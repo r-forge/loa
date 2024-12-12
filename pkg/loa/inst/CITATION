@@ -32,18 +32,6 @@ bibentry(bibtype = "Article",
         "https://www.jstatsoft.org/article/view/v063i04.")
         )
 
-bibentry(bibtype="proceedings",
-         title = "R, lattice and RgoogleMaps: A practical framework for the development of new geovisualizations.",
-         author = c(as.person("Karl Ropkins"),
-                             as.person("David C. Carslaw"),
-                             as.person("Said Munir"),
-                             as.person("Haibo Chen")),
-         year = "2012",
-         note = "Invited paper for Special Session on Statistical Graphics, American Statistical Association (ASA) 2012 Joint Statistical Meeting, San Diego, US, 29 July - 2 August, 2012.",
-
-         textVersion = "Karl Ropkins, David C. Carslaw, Said Munir and Haibo Chen (2012). R, lattice and RgoogleMaps: A practical framework for the development of new geovisualizations. Invited paper for Special Session on Statistical Graphics, American Statistical Association (ASA) 2012 Joint Statistical Meeting, San Diego, US, 29 July - 2 August, 2012."
-         )
-
 citFooter("Please cite both 'loa' and R ",
           "when using 'loa' for data analysis.",
           "For R citation, see ", sQuote("citation()"))

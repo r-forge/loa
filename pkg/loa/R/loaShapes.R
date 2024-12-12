@@ -154,7 +154,7 @@ loaPolygon <- function(x, y, z=NULL, rot=NULL, ..., polygon = NULL, loa.scale = 
 
     }
 
-    do.call(lpolygon, listUpdate(list(x=x, y=y), extra.args))
+    do.call(lattice::lpolygon, listUpdate(list(x=x, y=y), extra.args))
 
 }
 

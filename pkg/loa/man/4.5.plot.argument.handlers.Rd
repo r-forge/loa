@@ -216,8 +216,8 @@ myplot1 <- function(x, y, z = NULL, cex = NULL,
     #set cex
     cex <- cexHandler(z, cex, cex.range)
 
-    #plot
-    xyplot(y~x, cex = cex,...)
+    #plot (xyplot in lattice)
+    lattice::xyplot(y~x, cex = cex,...)
 }
 
 myplot1(a, a, a)
@@ -248,7 +248,7 @@ myplot2 <- function(x, y, z = NULL, ...){
 
     #col Management
     plot.args$col <- do.call(colHandler, plot.args)
-    do.call(xyplot, plot.args)
+    do.call(lattice::xyplot, plot.args)
 }
 
 

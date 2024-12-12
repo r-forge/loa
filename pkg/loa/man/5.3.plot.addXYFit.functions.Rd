@@ -20,23 +20,23 @@
 
 #main functions
 
-add.loaPanel(lattice.plot = trellis.last.object(), 
+add.loaPanel(lattice.plot = NULL, 
            preprocess = NULL, panel = NULL, 
            postprocess = NULL, ..., 
            use = NULL, ignore = NULL) 
 
-add.XYLMFit(lattice.plot = trellis.last.object(),
+add.XYLMFit(lattice.plot = NULL,
            preprocess = add.XYFit_prep,
            panel = panel.loaXYFit, ...)
 
-add.XYLOESSFit(lattice.plot = trellis.last.object(),
+add.XYLOESSFit(lattice.plot = NULL,
            preprocess = add.XYFit_prep, 
            model.method = loaXYFit_loess,
            panel = panel.loaXYFit, ...)
 
 #others
 
-add.XYFit_prep(lattice.plot = trellis.last.object(),
+add.XYFit_prep(lattice.plot = NULL,
            model.method = loaXYFit_lm, ...)
 
 loaXYFit_lm(x, y, output.len = 25, formula.signif = 2, 

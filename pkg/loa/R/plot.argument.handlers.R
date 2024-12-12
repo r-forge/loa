@@ -183,15 +183,15 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
 #new lines 
 #could merge this, one above and one below
     if(is.null(col.regions))
-         col.regions <- trellis.par.get("regions")$col
+         col.regions <- lattice::trellis.par.get("regions")$col
 ###############
     if (!is.null(col.regions) && length(col.regions) < 100) {
         if (length(col.regions) == 1) 
-            col.regions <- brewer.pal(9, col.regions)
+            col.regions <- RColorBrewer::brewer.pal(9, col.regions)
 ################
 #above creates issue for some brewer terms...
 #only have 8 terms...
-        col.regions <- colorRampPalette(col.regions)(100)
+        col.regions <- grDevices::colorRampPalette(col.regions)(100)
     }
     if (length(z) < 1) 
         z <- NULL
@@ -212,7 +212,7 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
 #                   colHandler(1, col.regions=col.regions)
 
 #using scheme
-        col <- trellis.par.get("dot.symbol")$col
+        col <- lattice::trellis.par.get("dot.symbol")$col
 
     }
     if (is.null(col)) {
@@ -247,7 +247,7 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
 #                at))(100)
 #        }
 #        else 
-       col <- level.colors(as.numeric(z), at, col.regions)
+       col <- lattice::level.colors(as.numeric(z), at, col.regions)
     }
     else {
         z <- if (is.numeric(col)) 
@@ -273,8 +273,8 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
 #job 1
 #changed 100 -> length(col.regions)
 #
-        col.regions <- colorRampPalette(level.colors(at, at, 
-            colorRampPalette(temp)(length(col.regions))))(length(col.regions))
+        col.regions <- grDevices::colorRampPalette(lattice::level.colors(at, at, 
+                grDevices::colorRampPalette(temp)(length(col.regions))))(length(col.regions))
 #################
     }
     if (is.null(alpha.regions)) 
@@ -290,7 +290,7 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
             alpha.regions[alpha.regions < 0] <- 0
         }
         col <- col2rgb(col)
-        col <- rgb(col[1, ], col[2, ], col[3, ], alpha = alpha.regions * 
+        col <- grDevices::rgb(col[1, ], col[2, ], col[3, ], alpha = alpha.regions * 
             255, maxColorValue = 255)
     }
     if (length(unique(col)) > 1) {
@@ -325,7 +325,8 @@ colHandler <- function (z = NULL, col = NULL, region = NULL, colorkey = FALSE,
         }
     }
     if (!is.null(colorkey)) {
-        colorkey <- list(right = list(fun = draw.colorkey, args = list(key = colorkey), 
+        colorkey <- list(right = list(fun = lattice::draw.colorkey, 
+                                      args = list(key = lattice::draw.colorkey), 
             draw = FALSE))
         if ("space" %in% names(colorkey$right$args$key)) 
             names(colorkey)[[1]] <- colorkey$right$args$key$space
@@ -378,8 +379,8 @@ old.colHandler <- function(z = NULL, col = NULL,
     #if col.regions supplied
     if(!is.null(col.regions) && length(col.regions) < 100){
         if(length(col.regions)==1)
-            col.regions <- brewer.pal(9, col.regions)
-         col.regions <- colorRampPalette(col.regions)(100)
+            col.regions <- RColorBrewer::brewer.pal(9, col.regions)
+         col.regions <- grDevices::colorRampPalette(col.regions)(100)
    }
 
    #don't assum col.regions is 100 long...
@@ -406,7 +407,7 @@ old.colHandler <- function(z = NULL, col = NULL,
             regions <- FALSE
         if(is.null(col.regions))
             regions <- FALSE
-        col <- trellis.par.get("dot.symbol")$col
+        col <- lattice::trellis.par.get("dot.symbol")$col
    } 
 
    #z handle if not col
@@ -436,14 +437,14 @@ old.colHandler <- function(z = NULL, col = NULL,
 
 #job 27b
 #replace below col <- with following one...
-            col <- level.colors(z, at)
+            col <- lattice::level.colors(z, at)
 #            col <- colorRampPalette(level.colors(1:100, 1:100))(length(z))
 
 #job 27
 #100 -> col.regions.len
 
-            col.regions <- colorRampPalette(level.colors(at, at))(col.regions.len)
-        } else col <- level.colors(z, at, colorRampPalette(col.regions)(length(z)))
+            col.regions <- grDevices::colorRampPalette(level.colors(at, at))(col.regions.len)
+        } else col <- lattice::level.colors(z, at, grDevices::colorRampPalette(col.regions)(length(z)))
 #job 27
 #col.regions <- colorRampPalette(col.regions)(length(z))
 
@@ -471,8 +472,8 @@ old.colHandler <- function(z = NULL, col = NULL,
 #job 27
 #100 -> col.regions.len
 
-       col.regions <- colorRampPalette(level.colors(at, at, 
-                          colorRampPalette(temp)(col.regions.len)))(col.regions.len)
+       col.regions <- grDevices::colorRampPalette(lattice::level.colors(at, at, 
+                        grDevices::colorRampPalette(temp)(col.regions.len)))(col.regions.len)
    }                       
 
    #handle alpha
@@ -706,7 +707,7 @@ lattice.extend.limits <- function (lim, length = 1, axs = "r", prop = if (axs ==
     else if (is.character(lim)) {
         c(1, length(lim)) + c(-1, 1) * if (axs == "i") 
             0.5
-        else lattice.getOption("axis.padding")$factor
+        else lattice::lattice.getOption("axis.padding")$factor
     }
     else if (length(lim) == 2) {
         if (lim[1] > lim[2]) {

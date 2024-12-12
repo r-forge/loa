@@ -62,7 +62,8 @@ loaPlot <- function (x, data = NULL, panel = panel.loaPlot, ...,
 
 
     if(is.matrix(x)){
-        extra.args <- do.call(matrixHandler, listUpdate(list(x=x, data=data), extra.args))
+        extra.args <- do.call(matrixHandler, 
+                              listUpdate(list(x=x, data=data), extra.args))
         x <- extra.args$x
         data <- extra.args$data
         extra.args <- extra.args[!names(extra.args) %in% c("x", "data")]
@@ -126,7 +127,8 @@ loaPlot <- function (x, data = NULL, panel = panel.loaPlot, ...,
 ##################
 
 #    if("col.regions" %in% names(extra.args))
-        extra.args$col.regions <- do.call(colRegionsHandler, extra.args[!names(extra.args) %in% c("alpha","alpha.regions")])
+        extra.args$col.regions <- do.call(colRegionsHandler, 
+                                          extra.args[!names(extra.args) %in% c("alpha","alpha.regions")])
 
 
 #if needed because col expanded to col.regions
@@ -264,10 +266,8 @@ loaPlot <- function (x, data = NULL, panel = panel.loaPlot, ...,
         
     extra.args$panel <- function(..., subscripts) panel.xyplot(..., subscripts=subscripts)
               
-    ans <- do.call(xyplot, extra.args)
+    ans <- do.call(lattice::xyplot, extra.args)
 
-
-    
     ans <- panelPal(ans, panel=panel, preprocess = preprocess,
                     by.group = by.group, by.zcase = by.zcase, 
                     reset.xylims = reset.xylims, legend = legend)
@@ -345,9 +345,7 @@ panel.loaPlot2 <- function(..., loa.settings = FALSE){
                     zcase.args= c("pch"),
                     default.settings = list(grid=TRUE, scheme="loa.scheme",
                                             load.lists = c("grid"),
-                                            key = "draw.loaPlotZKey")))
-
-
+                                            key = draw.loaPlotZKey)))
 
     plot.fun <- function(...){
                     extra.args <- list(...)
@@ -399,7 +397,7 @@ panel.loaPlot <- function(..., loa.settings = FALSE){
     if(loa.settings)
         return(list(group.args= c("col"),
                     zcase.args= c("pch"),
-                    default.settings = list(key.fun = "draw.loaPlotZKey", 
+                    default.settings = list(key.fun = draw.loaPlotZKey, 
 ########################
 #replaced bit
 #                                            grid = FALSE)))
@@ -545,7 +543,7 @@ panel.loa <- function(..., loa.settings = FALSE){
     if(loa.settings)
         return(list(group.args= c("col", "type"),
                     zcase.args= c("pch", "lty", "type"),
-                    default.settings = list(key.fun = "draw.loaKey02", 
+                    default.settings = list(key.fun = loa::draw.loaKey02, 
                                             type="p",
                                             scheme="loa.scheme",
                                             grid = TRUE, load.lists = c("grid"))))
@@ -607,14 +605,14 @@ panel.loa <- function(..., loa.settings = FALSE){
     for(i in 1:length(extra.args$x)){
     #for(i in 1:10){
         if(grepl("p", extra.args$type[i])){ 
-            lpoints(x=extra.args$x[i],
+            lattice::lpoints(x=extra.args$x[i],
                     y=extra.args$y[i],
                     col=extra.args$col[i],
                     cex=extra.args$cex[i],
                     pch=extra.args$pch[i])
         }
         if(grepl("h", extra.args$type[i])){
-            llines(x=extra.args$x[c(i, i)],
+            lattice::llines(x=extra.args$x[c(i, i)],
                     y=c(max(min(extra.args$ylim, na.rm=TRUE), 0, na.rm=TRUE),
                           extra.args$y[i]),
                     col=extra.args$col[i],
@@ -638,7 +636,7 @@ panel.loa <- function(..., loa.settings = FALSE){
             if(test){
                 if(grepl("l", extra.args$type[i]) & 
                     grepl("l", extra.args$type[i-1])){
-                    llines(x=extra.args$x[c(i, i-1)],
+                    lattice::llines(x=extra.args$x[c(i, i-1)],
                         y=extra.args$y[c(i, i-1)],
                         col=extra.args$col[i],
                         cex=extra.args$cex[i],

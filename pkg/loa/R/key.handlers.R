@@ -135,9 +135,9 @@ draw.loaColorKey <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     if(at.method=="1") key$labels$at <- key$at
     key$at <- seq(min(key$zlim), max(key$zlim), length.out = 800)
     if(is.null(key$col.regions))
-        key$col.regions <- trellis.par.get("regions")$col
+        key$col.regions <- lattice::trellis.par.get("regions")$col
     if(length(key$col.regions)<length(key$at))
-        key$col.regions <- colorRampPalette(key$col.regions)(length(key$at))
+        key$col.regions <- grDevices::colorRampPalette(key$col.regions)(length(key$at))
 
 ######################
 #catch col and alpha 
@@ -191,7 +191,7 @@ draw.loaColorKey <- function (key = NULL, draw = FALSE, vp = NULL, ...){
 #        key$alpha.regions <- NULL
 #    }
 
-    draw.colorkey(key, draw, vp)
+    lattice::draw.colorkey(key, draw, vp)
 
 }
 
@@ -250,7 +250,7 @@ draw.loaColorRegionsKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
         ref = key$at[-1])))
     key$alpha <- NULL
     key$alpha.regions <- NULL
-    draw.colorkey(key, draw, vp)
+    lattice::draw.colorkey(key, draw, vp)
 }
 
 
@@ -268,7 +268,7 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 
     if (!is.list(key)) {
         warning("suspect key ignored", call. = FALSE)
-        return(nullGrob())
+        return(grid::nullGrob())
     }
 
 #new version 0.2.28
@@ -278,7 +278,7 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 
     if("zcases.key.method2" %in% names(key) && key$zcases.key.method2)
         if("col" %in% names(key) && length(key$col)<2)
-            return(nullGrob())
+            return(grid::nullGrob())
 
 #new version 0.2.43
 #change to handling labs     
@@ -292,8 +292,8 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
     #taken from draw.loaPlotZKey
     #could simplify this
 
-    z.main <- nullGrob()
-    z.main.ht <- unit(0.01, "cm")
+    z.main <- grid::nullGrob()
+    z.main.ht <- grid::unit(0.01, "cm")
     zcases.main.ht <- z.main.ht
     zcases.main.wd <- z.main.ht
     zcases.elements <- z.main
@@ -406,9 +406,9 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
                 listUpdate(list(cex = 1.1), zcases$main)
             else list(cex = 1.1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
-            zcases.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-            zcases.main.ht <- unit(2, "grobheight", data = list(zcases.main))
-            zcases.main.wd <- unit(1.1, "grobwidth", data = list(zcases.main))
+            zcases.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+            zcases.main.ht <- grid::unit(2, "grobheight", data = list(zcases.main))
+            zcases.main.wd <- grid::unit(1.1, "grobwidth", data = list(zcases.main))
         }
         if (isGood4LOA(zcases$col) & isGood4LOA(zcases$cex) & 
             isGood4LOA(zcases$pch)) {
@@ -433,9 +433,9 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
              y1 <- y1 + rep(0:(len-1), each=4)
              y1 <- y1/(max(y1)+0.2)
 
-            zcases.elements <- polygonGrob(x = x1, y = y1,
+            zcases.elements <- grid::polygonGrob(x = x1, y = y1,
                   id.lengths=rep(4,len),  
-                  default.units = "npc", gp = gpar(fill = rep(zcases$col, 
+                  default.units = "npc", gp = grid::gpar(fill = rep(zcases$col, 
                   length.out = len), col =rep(zcases$border, len)))
 
 
@@ -444,8 +444,8 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 #                default.units = "npc", gp = gpar(col = rep(zcases$col, 
 #                  length.out = len), cex = temp * 0.8))
 
-            zcases.elements.ht <- unit(ht/4, "cm")
-            zcases.elements.wd <- unit(max(zcases$cex)/4, "cm")
+            zcases.elements.ht <- grid::unit(ht/4, "cm")
+            zcases.elements.wd <- grid::unit(max(zcases$cex)/4, "cm")
 
         }
         if (isGood4LOA(zcases$labels)) {
@@ -456,34 +456,34 @@ draw.zcasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
                 listUpdate(list(cex = 1), zcases$labels)
             else list(cex = 1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
-            zcases.labels <- textGrob(txt, x = 0, y = y, just = c("left", 
-                "centre"), gp = do.call(gpar, txt.settings), 
+            zcases.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", 
+                "centre"), gp = do.call(grid::gpar, txt.settings), 
                 default.units = "npc")
-            zcases.labels.ht <- unit(1.1, "grobheight", data = list(zcases.labels))
-            zcases.labels.wd <- unit(1.1, "grobwidth", data = list(zcases.labels))
+            zcases.labels.ht <- grid::unit(1.1, "grobheight", data = list(zcases.labels))
+            zcases.labels.wd <- grid::unit(1.1, "grobwidth", data = list(zcases.labels))
         }
     }
 
 
-    scales.ht <- unit.c(zcases.main.ht, zcases.elements.ht)
+    scales.ht <- grid::unit.c(zcases.main.ht, zcases.elements.ht)
 
 #simplify
     temp1 <- max(zcases.elements.wd)
     temp2 <- max(zcases.labels.wd)
     temp3 <- max(zcases.main.wd)
-    if (as.numeric(convertX(temp1 + temp2, "cm")) > as.numeric(convertX(temp3, 
+    if (as.numeric(grid::convertX(temp1 + temp2, "cm")) > as.numeric(grid::convertX(temp3, 
         "cm"))) {
-        scales.wd <- unit.c(temp1, temp2)
+        scales.wd <- grid::unit.c(temp1, temp2)
     }
     else {
-        scales.wd <- unit.c(temp1, temp3 - temp2)
+        scales.wd <- grid::unit.c(temp1, temp3 - temp2)
     }
-    key.layout <- grid.layout(nrow = 2, ncol = 2, heights = scales.ht, 
+    key.layout <- grid::grid.layout(nrow = 2, ncol = 2, heights = scales.ht, 
         widths = scales.wd, respect = TRUE, just = "right")
-    key.gf <- frameGrob(layout = key.layout, vp = vp)
-    key.gf <- placeGrob(key.gf, zcases.main, row = 1, col = 1:2)
-    key.gf <- placeGrob(key.gf, zcases.elements, row = 2, col = 1)
-    key.gf <- placeGrob(key.gf, zcases.labels, row = 2, col = 2)
+    key.gf <- grid::frameGrob(layout = key.layout, vp = vp)
+    key.gf <- grid::placeGrob(key.gf, zcases.main, row = 1, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, zcases.elements, row = 2, col = 1)
+    key.gf <- grid::placeGrob(key.gf, zcases.labels, row = 2, col = 2)
     key.gf
 }
 
@@ -503,7 +503,7 @@ draw.ycasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 
     if (!is.list(key)) {
         warning("suspect key ignored", call. = FALSE)
-        return(nullGrob())
+        return(grid::nullGrob())
     }
 
 #new to version 0.2.28
@@ -513,7 +513,7 @@ draw.ycasePlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 
     if("ycase.key.method2" %in% names(key) && key$ycase.key.method2)
         if("col" %in% names(key) && length(key$col)<2)
-            return(nullGrob())
+            return(grid::nullGrob())
 
     if(!"ycases.main" %in% names(key))
         key$ycases.main <- "ycases"
@@ -569,7 +569,7 @@ draw.loaPlotZKey <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     #check key useable
     if (!is.list(key)){ 
         warning("suspect key ignored", call. = FALSE)
-        return(nullGrob())
+        return(grid::nullGrob())
     }
 
 ###pch not tracked if set in call 
@@ -584,8 +584,8 @@ draw.loaPlotZKey <- function (key = NULL, draw = FALSE, vp = NULL, ...){
 #might not need some of these
 
     #default key components
-    z.main <- nullGrob() 
-    z.main.ht <- unit(0.01, "cm")
+    z.main <- grid::nullGrob() 
+    z.main.ht <- grid::unit(0.01, "cm")
     z.main.wd <- z.main.ht
     z.elements <- z.main 
     z.elements.ht <- z.main.ht
@@ -734,9 +734,9 @@ if(is.list(z) && length(z) > 0){
                 listUpdate(list(cex = 1.1), z$main) else list(cex = 1.1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        z.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-        z.main.ht <- unit(2, "grobheight", data = list(z.main))
-        z.main.wd <- unit(1.1, "grobwidth", data = list(z.main))
+        z.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+        z.main.ht <- grid::unit(2, "grobheight", data = list(z.main))
+        z.main.wd <- grid::unit(1.1, "grobwidth", data = list(z.main))
     } 
 
     if(isGood4LOA(z$col) & isGood4LOA(z$cex) & isGood4LOA(z$pch)){
@@ -757,12 +757,14 @@ if(is.list(z) && length(z) > 0){
 #some of this might not be needed
 #rep(...)?
 
-        z.elements <- pointsGrob(x = x, y = y, pch=rep(z$pch, length.out = len), size = unit(par("cex"), "char"), 
-                                 default.units = "npc", gp = gpar(col = rep(z$col, length.out = len), 
+        z.elements <- grid::pointsGrob(x = x, y = y, pch=rep(z$pch, length.out = len), 
+                                 size = grid::unit(par("cex"), "char"), 
+                                 default.units = "npc", 
+                                 gp = grid::gpar(col = rep(z$col, length.out = len), 
                                  cex=temp*0.8))
 
-        z.elements.ht <- unit(ht/4, "cm")
-        z.elements.wd <- unit(max(z$cex)/4, "cm")
+        z.elements.ht <- grid::unit(ht/4, "cm")
+        z.elements.wd <- grid::unit(max(z$cex)/4, "cm")
 
     } 
 
@@ -789,10 +791,11 @@ if(is.list(z) && length(z) > 0){
                 listUpdate(list(cex = 1), z$labels) else list(cex = 1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        z.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                             gp = do.call(gpar, txt.settings), default.units = "npc")
-        z.labels.ht <- unit(1.1, "grobheight", data=list(z.labels))
-        z.labels.wd <- unit(1.1, "grobwidth", data=list(z.labels))
+        z.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
+                             gp = do.call(grid::gpar, txt.settings), 
+                             default.units = "npc")
+        z.labels.ht <- grid::unit(1.1, "grobheight", data=list(z.labels))
+        z.labels.wd <- grid::unit(1.1, "grobwidth", data=list(z.labels))
 
     } 
 
@@ -856,9 +859,9 @@ if(is.list(groups) && length(groups) > 0){
                 listUpdate(list(cex = 1.1), groups$main) else list(cex = 1.1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        groups.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-        groups.main.ht <- unit(2, "grobheight", data = list(groups.main))
-        groups.main.wd <- unit(1.1, "grobwidth", data = list(groups.main))
+        groups.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+        groups.main.ht <- grid::unit(2, "grobheight", data = list(groups.main))
+        groups.main.wd <- grid::unit(1.1, "grobwidth", data = list(groups.main))
     } 
 
     if(isGood4LOA(groups$col) & isGood4LOA(groups$cex) & isGood4LOA(groups$pch)){
@@ -879,12 +882,15 @@ if(is.list(groups) && length(groups) > 0){
 #some of this might not be needed
 #rep(...)?
 
-        groups.elements <- pointsGrob(x = x, y = y, pch=rep(groups$pch, length.out = len), size = unit(par("cex"), "char"), 
-                                 default.units = "npc", gp = gpar(col = rep(groups$col, length.out = len), 
+        groups.elements <- grid::pointsGrob(x = x, y = y, 
+                                 pch=rep(groups$pch, length.out = len), 
+                                 size = grid::unit(par("cex"), "char"), 
+                                 default.units = "npc", 
+                                 gp = grid::gpar(col = rep(groups$col, length.out = len), 
                                  cex=temp*0.8))
 
-        groups.elements.ht <- unit(ht/4, "cm")
-        groups.elements.wd <- unit(max(groups$cex)/4, "cm")
+        groups.elements.ht <- grid::unit(ht/4, "cm")
+        groups.elements.wd <- grid::unit(max(groups$cex)/4, "cm")
 
     } 
 
@@ -911,10 +917,11 @@ if(is.list(groups) && length(groups) > 0){
                 listUpdate(list(cex = 1), groups$labels) else list(cex = 1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        groups.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                             gp = do.call(gpar, txt.settings), default.units = "npc")
-        groups.labels.ht <- unit(1.1, "grobheight", data=list(groups.labels))
-        groups.labels.wd <- unit(1.1, "grobwidth", data=list(groups.labels))
+        groups.labels <- grid::textGrob(txt, x = 0, y = y, 
+                             just = c("left", "centre"), 
+                             gp = do.call(grid::gpar, txt.settings), default.units = "npc")
+        groups.labels.ht <- grid::unit(1.1, "grobheight", data=list(groups.labels))
+        groups.labels.wd <- grid::unit(1.1, "grobwidth", data=list(groups.labels))
 
     } 
 
@@ -984,9 +991,9 @@ if(is.list(zcases) && length(zcases) > 0){
                 listUpdate(list(cex = 1.1), zcases$main) else list(cex = 1.1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        zcases.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-        zcases.main.ht <- unit(2, "grobheight", data = list(zcases.main))
-        zcases.main.wd <- unit(1.1, "grobwidth", data = list(zcases.main))
+        zcases.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+        zcases.main.ht <- grid::unit(2, "grobheight", data = list(zcases.main))
+        zcases.main.wd <- grid::unit(1.1, "grobwidth", data = list(zcases.main))
     } 
 
     if(isGood4LOA(zcases$col) & isGood4LOA(zcases$cex) & isGood4LOA(zcases$pch)){
@@ -1007,12 +1014,15 @@ if(is.list(zcases) && length(zcases) > 0){
 #some of this might not be needed
 #rep(...)?
 
-        zcases.elements <- pointsGrob(x = x, y = y, pch=rep(zcases$pch, length.out = len), size = unit(par("cex"), "char"), 
-                                 default.units = "npc", gp = gpar(col = rep(zcases$col, length.out = len), 
+        zcases.elements <- grid::pointsGrob(x = x, y = y, 
+                                 pch=rep(zcases$pch, length.out = len), 
+                                 size = grid::unit(par("cex"), "char"), 
+                                 default.units = "npc", 
+                                 gp = grid::gpar(col = rep(zcases$col, length.out = len), 
                                  cex=temp*0.8))
 
-        zcases.elements.ht <- unit(ht/4, "cm")
-        zcases.elements.wd <- unit(max(zcases$cex)/4, "cm")
+        zcases.elements.ht <- grid::unit(ht/4, "cm")
+        zcases.elements.wd <- grid::unit(max(zcases$cex)/4, "cm")
 
     } 
 
@@ -1039,10 +1049,10 @@ if(is.list(zcases) && length(zcases) > 0){
                 listUpdate(list(cex = 1), zcases$labels) else list(cex = 1)
         txt.settings <- getPlotArgs("axis.text", user.resets = temp)
         
-        zcases.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                             gp = do.call(gpar, txt.settings), default.units = "npc")
-        zcases.labels.ht <- unit(1.1, "grobheight", data=list(zcases.labels))
-        zcases.labels.wd <- unit(1.1, "grobwidth", data=list(zcases.labels))
+        zcases.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
+                             gp = do.call(grid::gpar, txt.settings), default.units = "npc")
+        zcases.labels.ht <- grid::unit(1.1, "grobheight", data=list(zcases.labels))
+        zcases.labels.wd <- grid::unit(1.1, "grobwidth", data=list(zcases.labels))
 
     } 
 
@@ -1074,7 +1084,8 @@ if(is.list(zcases) && length(zcases) > 0){
     #key output
     ###############
 
-    scales.ht <- unit.c(z.main.ht, z.elements.ht, groups.main.ht, groups.elements.ht, zcases.main.ht, zcases.elements.ht)
+    scales.ht <- grid::unit.c(z.main.ht, z.elements.ht, groups.main.ht, 
+                              groups.elements.ht, zcases.main.ht, zcases.elements.ht)
 
 ##################
 #this needs fixing
@@ -1085,32 +1096,32 @@ if(is.list(zcases) && length(zcases) > 0){
     temp2 <- max(z.labels.wd, groups.labels.wd, zcases.labels.wd)    
     temp3 <- max(z.main.wd, groups.main.wd, zcases.main.wd)
     
-    if(as.numeric(convertX(temp1 + temp2, "cm")) > as.numeric(convertX(temp3, "cm"))){
-        scales.wd <- unit.c(temp1, temp2)
+    if(as.numeric(grid::convertX(temp1 + temp2, "cm")) > as.numeric(grid::convertX(temp3, "cm"))){
+        scales.wd <- grid::unit.c(temp1, temp2)
     } else {
 #testing changes - temp2 to - temp1
-        scales.wd <- unit.c(temp1, temp3 - temp1)
+        scales.wd <- grid::unit.c(temp1, temp3 - temp1)
     }
     
 ###    scales.wd <- unit.c(z.elements.wd, z.labels.wd)
 
-    key.layout <- grid.layout(nrow = 6, ncol = 2,
+    key.layout <- grid::grid.layout(nrow = 6, ncol = 2,
                               heights = scales.ht, 
                               widths = scales.wd, 
                               respect = TRUE, just="right")
-    key.gf <- frameGrob(layout = key.layout, vp = vp)
+    key.gf <- grid::frameGrob(layout = key.layout, vp = vp)
 
-    key.gf <- placeGrob(key.gf, z.main, row = 1, col = 1:2)
-    key.gf <- placeGrob(key.gf, z.elements, row = 2, col = 1)
-    key.gf <- placeGrob(key.gf, z.labels, row = 2, col = 2)
+    key.gf <- grid::placeGrob(key.gf, z.main, row = 1, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, z.elements, row = 2, col = 1)
+    key.gf <- grid::placeGrob(key.gf, z.labels, row = 2, col = 2)
 
-    key.gf <- placeGrob(key.gf, groups.main, row = 3, col = 1:2)
-    key.gf <- placeGrob(key.gf, groups.elements, row = 4, col = 1)
-    key.gf <- placeGrob(key.gf, groups.labels, row = 4, col = 2)
+    key.gf <- grid::placeGrob(key.gf, groups.main, row = 3, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, groups.elements, row = 4, col = 1)
+    key.gf <- grid::placeGrob(key.gf, groups.labels, row = 4, col = 2)
 
-    key.gf <- placeGrob(key.gf, zcases.main, row = 5, col = 1:2)
-    key.gf <- placeGrob(key.gf, zcases.elements, row = 6, col = 1)
-    key.gf <- placeGrob(key.gf, zcases.labels, row = 6, col = 2)
+    key.gf <- grid::placeGrob(key.gf, zcases.main, row = 5, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, zcases.elements, row = 6, col = 1)
+    key.gf <- grid::placeGrob(key.gf, zcases.labels, row = 6, col = 2)
 
     key.gf
 
@@ -1156,11 +1167,11 @@ draw.groupPlotKey <- function (key = NULL, draw = FALSE, vp = NULL, ...)
 
     if (!is.list(key)) {
         warning("suspect key ignored", call. = FALSE)
-        return(nullGrob())
+        return(grid::nullGrob())
     }
 
     #nothing to plot
-    if(!"group.ids" %in% names(key)) return(nullGrob())
+    if(!"group.ids" %in% names(key)) return(grid::nullGrob())
 
     temp <- listUpdate(list(space="right", adj=1), key, use=c("space", "adj"))
     temp$zcases.main = if("main" %in% names(key))
@@ -1211,7 +1222,7 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     #check key useable
     if (!is.list(key)){ 
         warning("suspect key ignored", call. = FALSE)
-        return(nullGrob())
+        return(grid::nullGrob())
     }
     
     ###pch not tracked if set in call 
@@ -1226,8 +1237,8 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     #might not need some of these
     
     #default key components
-    z.main <- nullGrob() 
-    z.main.ht <- unit(0.01, "cm")
+    z.main <- grid::nullGrob() 
+    z.main.ht <- grid::unit(0.01, "cm")
     z.main.wd <- z.main.ht
     z.elements <- z.main 
     z.elements.ht <- z.main.ht
@@ -1420,9 +1431,9 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1.1), z$main) else list(cex = 1.1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            z.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-            z.main.ht <- unit(2, "grobheight", data = list(z.main))
-            z.main.wd <- unit(1.1, "grobwidth", data = list(z.main))
+            z.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+            z.main.ht <- grid::unit(2, "grobheight", data = list(z.main))
+            z.main.wd <- grid::unit(1.1, "grobwidth", data = list(z.main))
         } 
         
         if(isGood4LOA(z$col) & isGood4LOA(z$cex) & isGood4LOA(z$pch) & 
@@ -1494,21 +1505,22 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
             #rep(...)?
             
             
-            z.elements <- pointsGrob(x = x, y = y, pch=rep(z$pch, length.out = len), size = unit(par("cex"), "char"), 
-                                          
-                                          default.units = "npc", gp = gpar(col = rep(z$col, length.out = len), 
-                                                                           cex=my.cex*0.8 * 0.8))
-            z.el2 <- segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
-                                    gp =gpar(col=z$col, lty=lne.lty, 
+            z.elements <- grid::pointsGrob(x = x, y = y, pch=rep(z$pch, length.out = len), 
+                                          size = grid::unit(par("cex"), "char"), 
+                                          default.units = "npc", 
+                                          gp = grid::gpar(col = rep(z$col, length.out = len), 
+                                                          cex=my.cex*0.8 * 0.8))
+            z.el2 <- grid::segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
+                                    gp =grid::gpar(col=z$col, lty=lne.lty, 
                                              lwd=z$lwd))
-            z.el3 <- segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
-                                    gp =gpar(col=z$col, lty=h.lty, 
+            z.el3 <- grid::segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
+                                    gp =grid::gpar(col=z$col, lty=h.lty, 
                                              lwd=z$lwd))
             
-            z.elements <- gTree(children = gList(z.elements, z.el2, z.el3))
+            z.elements <- grid::gTree(children = grid::gList(z.elements, z.el2, z.el3))
             
-            z.elements.ht <- unit(ht/4, "cm")
-            z.elements.wd <- unit(wdth/4, "cm")
+            z.elements.ht <- grid::unit(ht/4, "cm")
+            z.elements.wd <- grid::unit(wdth/4, "cm")
             
             
         } 
@@ -1536,10 +1548,11 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1), z$labels) else list(cex = 1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            z.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                                 gp = do.call(gpar, txt.settings), default.units = "npc")
-            z.labels.ht <- unit(1.1, "grobheight", data=list(z.labels))
-            z.labels.wd <- unit(1.1, "grobwidth", data=list(z.labels))
+            z.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
+                                 gp = do.call(grid::gpar, txt.settings), 
+                                 default.units = "npc")
+            z.labels.ht <- grid::unit(1.1, "grobheight", data=list(z.labels))
+            z.labels.wd <- grid::unit(1.1, "grobwidth", data=list(z.labels))
             
         } 
         
@@ -1632,9 +1645,9 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1.1), groups$main) else list(cex = 1.1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            groups.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-            groups.main.ht <- unit(2, "grobheight", data = list(groups.main))
-            groups.main.wd <- unit(1.1, "grobwidth", data = list(groups.main))
+            groups.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+            groups.main.ht <- grid::unit(2, "grobheight", data = list(groups.main))
+            groups.main.wd <- grid::unit(1.1, "grobwidth", data = list(groups.main))
         } 
         
         
@@ -1698,21 +1711,24 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
             #rep(...)?
             
             
-            groups.elements <- pointsGrob(x = x, y = y, pch=rep(groups$pch, length.out = len), size = unit(par("cex"), "char"), 
-            
-                                                                        default.units = "npc", gp = gpar(col = rep(groups$col, length.out = len), 
-                                                                           cex=my.cex*0.8 * 0.8))
-            grp.el2 <- segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
-                                    gp =gpar(col=groups$col, lty=lne.lty, 
+            groups.elements <- grid::pointsGrob(x = x, y = y, 
+                                                pch=rep(groups$pch, length.out = len), 
+                                                size = grid::unit(par("cex"), "char"), 
+                                                default.units = "npc", 
+                                                gp = grid::gpar(col = rep(groups$col, 
+                                                                length.out = len), 
+                                                                cex=my.cex*0.8 * 0.8))
+            grp.el2 <- grid::segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
+                                    gp =grid::gpar(col=groups$col, lty=lne.lty, 
                                              lwd=groups$lwd))
-            grp.el3 <- segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
-                                    gp =gpar(col=groups$col, lty=h.lty, 
+            grp.el3 <- grid::segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
+                                    gp =grid::gpar(col=groups$col, lty=h.lty, 
                                              lwd=groups$lwd))
             
-            groups.elements <- gTree(children = gList(groups.elements, grp.el2, grp.el3))
+            groups.elements <- grid::gTree(children = grid::gList(groups.elements, grp.el2, grp.el3))
             
-            groups.elements.ht <- unit(ht/4, "cm")
-            groups.elements.wd <- unit(wdth/4, "cm")
+            groups.elements.ht <- grid::unit(ht/4, "cm")
+            groups.elements.wd <- grid::unit(wdth/4, "cm")
             
         } 
         
@@ -1738,10 +1754,11 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1), groups$labels) else list(cex = 1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            groups.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                                      gp = do.call(gpar, txt.settings), default.units = "npc")
-            groups.labels.ht <- unit(1.1, "grobheight", data=list(groups.labels))
-            groups.labels.wd <- unit(1.1, "grobwidth", data=list(groups.labels))
+            groups.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
+                                      gp = do.call(grid::gpar, txt.settings), 
+                                      default.units = "npc")
+            groups.labels.ht <- grid::unit(1.1, "grobheight", data=list(groups.labels))
+            groups.labels.wd <- grid::unit(1.1, "grobwidth", data=list(groups.labels))
             
         } 
         
@@ -1836,9 +1853,9 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1.1), zcases$main) else list(cex = 1.1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            zcases.main <- textGrob(txt, gp = do.call(gpar, txt.settings))
-            zcases.main.ht <- unit(2, "grobheight", data = list(zcases.main))
-            zcases.main.wd <- unit(1.1, "grobwidth", data = list(zcases.main))
+            zcases.main <- grid::textGrob(txt, gp = do.call(grid::gpar, txt.settings))
+            zcases.main.ht <- grid::unit(2, "grobheight", data = list(zcases.main))
+            zcases.main.wd <- grid::unit(1.1, "grobwidth", data = list(zcases.main))
         } 
         
         if(isGood4LOA(zcases$col) & isGood4LOA(zcases$cex) & isGood4LOA(zcases$pch) &
@@ -1905,21 +1922,25 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
             #rep(...)?
             
             
-            zcases.elements <- pointsGrob(x = x, y = y, pch=rep(zcases$pch, length.out = len), size = unit(par("cex"), "char"), 
-                                          
-                                          default.units = "npc", gp = gpar(col = rep(zcases$col, length.out = len), 
-                                                                           cex=my.cex*0.8 * 0.8))
-            zcases.el2 <- segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
-                                    gp =gpar(col=zcases$col, lty=lne.lty, 
+            zcases.elements <- grid::pointsGrob(x = x, y = y, 
+                                      pch=rep(zcases$pch, length.out = len), 
+                                      size = grid::unit(par("cex"), "char"), 
+                                          default.units = "npc", 
+                                      gp = grid::gpar(col = rep(zcases$col, 
+                                                                length.out = len), 
+                                                      cex=my.cex*0.8 * 0.8))
+            zcases.el2 <- grid::segmentsGrob(x0 = 0.1, x1 = 0.9, y0 = y, y1 = y,
+                                    gp =grid::gpar(col=zcases$col, lty=lne.lty, 
                                              lwd=zcases$lwd))
-            zcases.el3 <- segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
-                                    gp =gpar(col=zcases$col, lty=h.lty, 
+            zcases.el3 <- grid::segmentsGrob(x0 = 0.5, x1 = 0.5, y0 = y, y1 = y.2,
+                                    gp =grid::gpar(col=zcases$col, lty=h.lty, 
                                              lwd=zcases$lwd))
             
-            zcases.elements <- gTree(children = gList(zcases.elements, zcases.el2, zcases.el3))
+            zcases.elements <- grid::gTree(children = grid::gList(zcases.elements, 
+                                                                  zcases.el2, zcases.el3))
             
-            zcases.elements.ht <- unit(ht/4, "cm")
-            zcases.elements.wd <- unit(wdth/4, "cm")
+            zcases.elements.ht <- grid::unit(ht/4, "cm")
+            zcases.elements.wd <- grid::unit(wdth/4, "cm")
             
         } 
         
@@ -1946,10 +1967,11 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
                 listUpdate(list(cex = 1), zcases$labels) else list(cex = 1)
             txt.settings <- getPlotArgs("axis.text", user.resets = temp)
             
-            zcases.labels <- textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
-                                      gp = do.call(gpar, txt.settings), default.units = "npc")
-            zcases.labels.ht <- unit(1.1, "grobheight", data=list(zcases.labels))
-            zcases.labels.wd <- unit(1.1, "grobwidth", data=list(zcases.labels))
+            zcases.labels <- grid::textGrob(txt, x = 0, y = y, just = c("left", "centre"), 
+                                      gp = do.call(grid::gpar, txt.settings), 
+                                      default.units = "npc")
+            zcases.labels.ht <- grid::unit(1.1, "grobheight", data=list(zcases.labels))
+            zcases.labels.wd <- grid::unit(1.1, "grobwidth", data=list(zcases.labels))
             
         } 
         
@@ -1981,7 +2003,8 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     #key output
     ###############
     
-    scales.ht <- unit.c(z.main.ht, z.elements.ht, groups.main.ht, groups.elements.ht, zcases.main.ht, zcases.elements.ht)
+    scales.ht <- grid::unit.c(z.main.ht, z.elements.ht, groups.main.ht, 
+                        groups.elements.ht, zcases.main.ht, zcases.elements.ht)
     
     ##################
     #this needs fixing
@@ -1992,32 +2015,32 @@ draw.loaKey02 <- function (key = NULL, draw = FALSE, vp = NULL, ...){
     temp2 <- max(z.labels.wd, groups.labels.wd, zcases.labels.wd)    
     temp3 <- max(z.main.wd, groups.main.wd, zcases.main.wd)
     
-    if(as.numeric(convertX(temp1 + temp2, "cm")) > as.numeric(convertX(temp3, "cm"))){
-        scales.wd <- unit.c(temp1, temp2)
+    if(as.numeric(grid::convertX(temp1 + temp2, "cm")) > as.numeric(grid::convertX(temp3, "cm"))){
+        scales.wd <- grid::unit.c(temp1, temp2)
     } else {
         #testing changes - temp2 to - temp1
-        scales.wd <- unit.c(temp1, temp3 - temp1)
+        scales.wd <- grid::unit.c(temp1, temp3 - temp1)
     }
     
     ###    scales.wd <- unit.c(z.elements.wd, z.labels.wd)
     
-    key.layout <- grid.layout(nrow = 6, ncol = 2,
+    key.layout <- grid::grid.layout(nrow = 6, ncol = 2,
                               heights = scales.ht, 
                               widths = scales.wd, 
                               respect = TRUE, just="right")
-    key.gf <- frameGrob(layout = key.layout, vp = vp)
+    key.gf <- grid::frameGrob(layout = key.layout, vp = vp)
     
-    key.gf <- placeGrob(key.gf, z.main, row = 1, col = 1:2)
-    key.gf <- placeGrob(key.gf, z.elements, row = 2, col = 1)
-    key.gf <- placeGrob(key.gf, z.labels, row = 2, col = 2)
+    key.gf <- grid::placeGrob(key.gf, z.main, row = 1, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, z.elements, row = 2, col = 1)
+    key.gf <- grid::placeGrob(key.gf, z.labels, row = 2, col = 2)
     
-    key.gf <- placeGrob(key.gf, groups.main, row = 3, col = 1:2)
-    key.gf <- placeGrob(key.gf, groups.elements, row = 4, col = 1)
-    key.gf <- placeGrob(key.gf, groups.labels, row = 4, col = 2)
+    key.gf <- grid::placeGrob(key.gf, groups.main, row = 3, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, groups.elements, row = 4, col = 1)
+    key.gf <- grid::placeGrob(key.gf, groups.labels, row = 4, col = 2)
     
-    key.gf <- placeGrob(key.gf, zcases.main, row = 5, col = 1:2)
-    key.gf <- placeGrob(key.gf, zcases.elements, row = 6, col = 1)
-    key.gf <- placeGrob(key.gf, zcases.labels, row = 6, col = 2)
+    key.gf <- grid::placeGrob(key.gf, zcases.main, row = 5, col = 1:2)
+    key.gf <- grid::placeGrob(key.gf, zcases.elements, row = 6, col = 1)
+    key.gf <- grid::placeGrob(key.gf, zcases.labels, row = 6, col = 2)
     
     key.gf
     

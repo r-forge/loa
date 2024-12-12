@@ -334,7 +334,7 @@ panel.localScale <- function(x.loc, y.loc, lim, ...,
     #get panel.scale bits for line
     axis.pars <- getPlotArgs("axis.line", panel.scale, is.scales=TRUE, user.resets = axis)
     if(isGood4LOA(axis.pars))
-        do.call(llines, listUpdate(list(x=x.loc, y= y.loc), axis.pars))
+        do.call(lattice::llines, listUpdate(list(x=x.loc, y= y.loc), axis.pars))
 
     #get ticks and annotation and add
     ticks.pars <- getPlotArgs("axis.line", panel.scale, is.scales=TRUE, user.resets = ticks)
@@ -343,11 +343,11 @@ panel.localScale <- function(x.loc, y.loc, lim, ...,
     if(length(at)>0){
         for(i in 1:length(at))
             if(isGood4LOA(ticks.pars))
-                do.call(llines, listUpdate(list(x = c(my.x[i], my.x2[i]), 
+                do.call(lattice::llines, listUpdate(list(x = c(my.x[i], my.x2[i]), 
                                                 y = c(my.y[i], my.y2[i])), ticks.pars))
 
         if(isGood4LOA(annotation.pars))
-            do.call(ltext, listUpdate(list(x = my.x3, y = my.y3,
+            do.call(lattice::ltext, listUpdate(list(x = my.x3, y = my.y3,
                                            labels = labels), annotation.pars)) 
     }       
 
@@ -369,7 +369,7 @@ logTicks <- function (lim, loc = c(1, 5)) {
 }
 
 yscale.component.log10 <- function(...) {
-    ans <- yscale.components.default(...)
+    ans <- lattice::yscale.components.default(...)
     ans$right <- ans$left
     temp <- logTicks(10^ans$num.limit, 1:9)
     ans$left$ticks$at <- log10(temp)
@@ -381,7 +381,7 @@ yscale.component.log10 <- function(...) {
 }
 
 xscale.component.log10 <- function(...) {
-    ans <- xscale.components.default(...)
+    ans <- lattice::xscale.components.default(...)
     ans$bottom <- ans$top
     temp <- logTicks(10^ans$num.limit, 1:9)
     ans$bottom$ticks$at <- log10(temp)

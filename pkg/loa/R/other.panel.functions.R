@@ -126,13 +126,15 @@ return(output)
 
 
 
-getPlotArgs <- function(defaults.as = "axis.line", source = TRUE, local.resets = TRUE, user.resets = TRUE, 
-                        elements = NULL, ..., is.scales.lines = NULL, defaults.only = TRUE){
+getPlotArgs <- function(defaults.as = "axis.line", source = TRUE, 
+                        local.resets = TRUE, user.resets = TRUE, 
+                        elements = NULL, ..., is.scales.lines = NULL, 
+                        defaults.only = TRUE){
 
 
 
     #check defaults.as
-    if(!defaults.as[1] %in% names(trellis.par.get())){
+    if(!defaults.as[1] %in% names(lattice::trellis.par.get())){
          warning("could not recover 'defaults.as' [guessing axis.text]", call.=FALSE)
          defaults.as <- "axis.text"
     }
@@ -142,7 +144,7 @@ getPlotArgs <- function(defaults.as = "axis.line", source = TRUE, local.resets =
                                TRUE else FALSE
 
     #get defaults
-    defaults <- trellis.par.get(defaults.as[1])
+    defaults <- lattice::trellis.par.get(defaults.as[1])
 
     ans <- getArgs(source = source, local.resets = local.resets, user.resets = user.resets, 
                    is.scales.lines = is.scales.lines, defaults.only = defaults.only, defaults = defaults, 

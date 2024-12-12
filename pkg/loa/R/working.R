@@ -15,8 +15,11 @@
 
 
 
-addXY <- function (x=NULL, y=NULL, z=NULL, ..., unit = "native", scale.correction = NULL, object = trellis.last.object()){ 
-
+addXY <- function (x=NULL, y=NULL, z=NULL, ..., unit = "native", 
+                   scale.correction = NULL, object = NULL){ 
+   if(is.null(object)){
+      object <- lattice::trellis.last.object()
+   }
    #add points to an existing trellis.plot
    extra.args <- list(...)
    panel <- object$panel
@@ -30,8 +33,11 @@ addXY <- function (x=NULL, y=NULL, z=NULL, ..., unit = "native", scale.correctio
 
 #same for text
 
-addText <- function (x=NULL, y=NULL, text=NULL, ..., unit = "native", scale.correction = NULL, object = trellis.last.object()){ 
-
+addText <- function (x=NULL, y=NULL, text=NULL, ..., unit = "native", 
+                     scale.correction = NULL, object = NULL){ 
+   if(is.null(object)){
+      object <- lattice::trellis.last.object()
+   }
    #add text to an existing trellis.plot
    extra.args <- list(...)
    panel <- object$panel
@@ -46,7 +52,7 @@ addText <- function (x=NULL, y=NULL, text=NULL, ..., unit = "native", scale.corr
 
 #add trend line(s) to an existing plot
 
-addTrendLine <- function(..., object=trellis.last.object()){
+addTrendLine <- function(..., object=NULL){
 
 #work this up
 #1. need to repeat for each panel 
@@ -64,7 +70,10 @@ addTrendLine <- function(..., object=trellis.last.object()){
  
 
     #quick function to add fit line to lattice plot
-    
+    if(is.null(object)){
+       object <- lattice::trellis.last.object()
+    }
+  
     x <- object$panel.args[[1]]$x
     y <- object$panel.args[[1]]$y
 
@@ -77,16 +86,16 @@ addTrendLine <- function(..., object=trellis.last.object()){
     panel <- object$panel
     object$panel <- function(...){
                     panel(...)
-                    panel.polygon(x=c(new.x, rev(new.x)), 
+                    lattice::panel.polygon(x=c(new.x, rev(new.x)), 
                                   y=c(out$fit+(3*out$se.fit), rev(out$fit-(3*out$se.fit))), 
                                   border=FALSE, col=2, alpha=0.1)
-                    panel.polygon(x=c(new.x, rev(new.x)), 
+                    lattice::panel.polygon(x=c(new.x, rev(new.x)), 
                                   y=c(out$fit+(2*out$se.fit), rev(out$fit-(2*out$se.fit))), 
                                   border=FALSE, col=2, alpha=0.1)
-                    panel.polygon(x=c(new.x, rev(new.x)), 
+                    lattice::panel.polygon(x=c(new.x, rev(new.x)), 
                                   y=c(out$fit+(1*out$se.fit), rev(out$fit-(1*out$se.fit))), 
                                   border=FALSE, col=2, alpha=0.1)
-                    panel.xyplot(x=new.x, y=out$fit, col=2, lwd=2, type="l")
+                    lattice::panel.xyplot(x=new.x, y=out$fit, col=2, lwd=2, type="l")
                 }
 
     #outputs

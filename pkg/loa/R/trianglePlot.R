@@ -51,7 +51,8 @@ trianglePlot <- function(x, data = NULL, ..., ref.cols = TRUE){
     ref.cols <- rep(ref.cols, length.out=3)
 
     extra.args <- listUpdate(list(x=x, data=data, formula.type="z~a0+b0+c0|cond", 
-                                  coord.conversion=triABC2XY, panel=panel.trianglePlot, ref.cols=ref.cols), 
+                                  coord.conversion=triABC2XY, 
+                                  panel=panel.trianglePlot, ref.cols=ref.cols), 
                              extra.args)
 
     do.call(loaPlot, extra.args)
@@ -196,13 +197,13 @@ panel.triangleByGroupPolygon <- function (x = NULL, y = NULL, a0 = NULL, b0 = NU
         if ("groups" %in% names(extra.args) || "zcases" %in% 
             names(extra.args)) 
             do.call(groupsAndZcasesPanelHandler, listUpdate(extra.args, 
-                list(panel = panel.polygon, plot = plot, 
+                list(panel = lattice::panel.polygon, plot = plot, 
                   process = process), ignore = c("grid", "alpha", "alpha.regions")))
         else {
             #group/zcase handler assigns col
             #but if no groups need to make sure it is set here
             extra.args$col <- do.call(colHandler, extra.args)
-            do.call(panel.polygon, listUpdate(extra.args, 
+            do.call(lattice::panel.polygon, listUpdate(extra.args, 
                     list(), ignore = c("grid", "alpha", "alpha.regions")))
         }
         if (extra.args$local.scales) 
@@ -622,7 +623,7 @@ function (alim = NULL, blim = NULL, clim = NULL, ...,
 #        (temp$x[1] - temp$x[3])), y = temp$y[1] + (2 * (y.offset = temp$y[2] - 
 #        temp$y[1])), alab, adj = c(1, 0.5), srt=60)
 
-    ltext(x = temp$x[1] + (4 * (temp$x[2] - temp$x[1])), y = temp$y[1] + 
+    lattice::ltext(x = temp$x[1] + (4 * (temp$x[2] - temp$x[1])), y = temp$y[1] + 
         (3 * (y.offset = temp$y[2] - temp$y[1])), alab, adj = c(0.5, 
         0.5), srt=60, cex = text.cex)
 
@@ -644,7 +645,7 @@ function (alim = NULL, blim = NULL, clim = NULL, ...,
             temp$x[1], y.offset = temp$y[2] - temp$y[1], axis = axes.pars$b0, 
         ticks = tick.pars$b0, annotation = ann.pars$b0)
 
-    ltext(x = temp$x[1] + (4 * (temp$x[2] - temp$x[1])), y = temp$y[1] + 
+    lattice::ltext(x = temp$x[1] + (4 * (temp$x[2] - temp$x[1])), y = temp$y[1] + 
         (3 * (y.offset = temp$y[2] - temp$y[1])), blab, adj = c(0.5, 
         0.5), srt=300, cex = text.cex)
 
@@ -665,7 +666,7 @@ function (alim = NULL, blim = NULL, clim = NULL, ...,
             temp$x[1], y.offset = temp$y[2] - temp$y[1], axis = axes.pars$c0, 
         ticks = tick.pars$c0, annotation = ann.pars$c0)
 
-    ltext(x = temp$x[2], y = temp$y[1] + (3 * (y.offset = temp$y[2] - 
+    lattice::ltext(x = temp$x[2], y = temp$y[1] + (3 * (y.offset = temp$y[2] - 
         temp$y[1])), clab, adj = c(0.5, 0.5), cex=text.cex)
 
 

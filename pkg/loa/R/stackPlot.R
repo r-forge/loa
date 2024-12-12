@@ -30,7 +30,9 @@ stackPlot <- function (x, data = NULL, ...){
 #stackXZ2XYZ
 ###############################
 
-stackXZ2XYZ <- function(col=NULL, col.regions=NULL, par.settings=NULL, scheme=NULL, border=NULL, key.handling = NULL, force.key=NULL,...){
+stackXZ2XYZ <- function(col=NULL, col.regions=NULL, par.settings=NULL, 
+                        scheme=NULL, border=NULL, key.handling = NULL, 
+                        force.key=NULL,...){
 
      #might rethink this
      #might not export it
@@ -152,7 +154,7 @@ panel.stackPlot <- function (..., process=TRUE, plot=TRUE, loa.settings = FALSE)
         if(!"y0" %in% names(extra.args))
             extra.args$y0 <- rep(0, length(extra.args$x))
         extra.args$y <- c(extra.args$y, rev(extra.args$y0)) 
-        do.call(panel.polygon, extra.args)
+        do.call(lattice::panel.polygon, extra.args)
     }
     do.call(groupsAndZcasesPanelHandler, listUpdate(list(...), 
         list(panel = plot.fun)))

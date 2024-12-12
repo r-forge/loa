@@ -38,7 +38,7 @@
   #map handlers
   getRGMapArg(ylim, xlim, ..., lim.borders = 0.1)
   getOSMapArg(ylim, xlim, ..., lim.borders = 0.1)
-  loaMapArg(object = trellis.last.object())
+  loaMapArg(object = NULL)
 
   #map panels
   panel.loaBGMapPlotRaster(map)
@@ -55,7 +55,7 @@
   googleMap(...)
   GoogleMap(...)
   makeMapArg(...)
-  getMapArg(object = trellis.last.object())
+  getMapArg(object = NULL)
 }
 
 \arguments{

@@ -44,8 +44,8 @@ getXY <- function (n = -1, ..., unit = "native", scale.correction = NULL)
 
     #get safe trellis focus
     focus.list <- listUpdate(extra.args, list(), 
-                             use.a = names(formals(trellis.focus)))   
-    do.call(trellis.focus, focus.list)
+                             use.a = names(formals(lattice::trellis.focus)))   
+    do.call(lattice::trellis.focus, focus.list)
 
     #check for plot arguments
     plot.list <- listUpdate(extra.args, list(), 
@@ -60,7 +60,7 @@ getXY <- function (n = -1, ..., unit = "native", scale.correction = NULL)
 #####################
 
     #loop grid.locator 
-    while (!is.null(temp <- grid.locator(unit = unit)) & n != 0) {
+    while (!is.null(temp <- grid::grid.locator(unit = unit)) & n != 0) {
         n <- n - 1
         ans$x <- c(ans$x, as.numeric(temp$x))
         ans$y <- c(ans$y, as.numeric(temp$y))
@@ -86,7 +86,7 @@ getXY <- function (n = -1, ..., unit = "native", scale.correction = NULL)
         ans <- scale.correction(ans)
 
     #unfocus and return results
-    trellis.unfocus()
+    lattice::trellis.unfocus()
     ans
 }
 
@@ -133,8 +133,11 @@ getLatLon <- function(...,
 
 #not exportinging 
 
-screenLatticePlot <- function(object = trellis.last.object(),...){
+screenLatticePlot <- function(object = NULL,...){
 #temp
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
 
 this.panel <- object$panel
 xlim <- object$x.limits
@@ -208,12 +211,12 @@ while(!test){
          y <- na.omit(my.y)
 
          if(length(x)==1 && length(y)==1)
-             lpoints(x=x,y=y, cex=4, pch=3, col="black")
+             lattice::lpoints(x=x,y=y, cex=4, pch=3, col="black")
 
          if(length(x)>1 && length(y)>1){
              x0 <- c(max(x), max(x), min(x), min(x))
              y0 <- c(max(y), min(y), min(y), max(y))
-             lpolygon(x=x0, y=y0)
+             lattice::lpolygon(x=x0, y=y0)
          } 
 
     } 

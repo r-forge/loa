@@ -34,7 +34,7 @@
 
 #add ghost points in multipanel loaPlots
 
-add.XYZGhosts <- function (object = trellis.last.object(), 
+add.XYZGhosts <- function (object = NULL, 
                            ..., unit = "native", 
                            ghost.panel = panel.loaPlot){ 
 
@@ -47,6 +47,11 @@ add.XYZGhosts <- function (object = trellis.last.object(),
 
   
   #add ghost points to an existing plot
+  #######################################
+  #use last lattice plot if nothing sent
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   extra.args <- list(...)
   temp <- object$panel.args
   if(length(temp)==1) warning("ghosts might not help...")
@@ -78,13 +83,17 @@ add.XYZGhosts <- function (object = trellis.last.object(),
 
 #add a Y2 scale to an existing plot
 
-add.Y2Axis <- function (object = trellis.last.object(), 
+add.Y2Axis <- function (object = NULL, 
                         ..., unit = "native", 
                            rescale = NULL){ 
   #setup
   x.args <- list(...)
   if(is.null(rescale)){
     rescale <- 1
+  }
+  #use last lattice plot if nothing sent
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
   }
 
   #plot reset
@@ -111,12 +120,12 @@ add.Y2Axis <- function (object = trellis.last.object(),
         if(is.null(text.col)) text.col <- "black"
         # colour right separately
         if(side %in% c("left","bottom", "top")) {
-          axis.default(side = side, text.col=text.col, 
+          lattice::axis.default(side = side, text.col=text.col, 
                        line.col=line.col, ...)
         } else {
           line.col <- x.args$col
           text.col <- x.args$col
-          axis.default(side = side, text.col=text.col, 
+          lattice::axis.default(side = side, text.col=text.col, 
                        line.col=line.col, ...)
         }
       
@@ -137,12 +146,16 @@ add.Y2Axis <- function (object = trellis.last.object(),
 
 #add a Y2 scale to an existing plot
 
-add.XYPolygon <- function (object = trellis.last.object(),
+add.XYPolygon <- function (object = NULL,
                            x = NULL, y = NULL, data = NULL,
                            ..., unit = "native",
                            y2.scale=FALSE, first=FALSE){ 
   
   #setup 
+  #use last lattice plot if nothing sent
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   x.args <- listUpdate(list(col="grey", border=NA), 
                        list(...))
   #########################
@@ -175,13 +188,13 @@ add.XYPolygon <- function (object = trellis.last.object(),
   panel <- object$panel
   if(first){
     object$panel <- function(...){
-      do.call(panel.polygon, df)
+      do.call(lattice::panel.polygon, df)
       panel(...)
     }
   } else {
     object$panel <- function(...){
       panel(...)
-      do.call(panel.polygon, df)
+      do.call(lattice::panel.polygon, df)
     }
   }
   object
@@ -203,12 +216,16 @@ add.XYPolygon <- function (object = trellis.last.object(),
 #also transforms data
 
 
-add.LonLatMap <- function (object = trellis.last.object(),
+add.LonLatMap <- function (object = NULL,
                         ..., map = NULL, recolor.map=FALSE,
                         show.axes = FALSE, unit = "native",
                         first = TRUE){ 
   #draw and add map layer
-
+  #####################
+  #use last lattice plot if nothing sent
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   #test this is not multiscale
   if(!is.numeric(object$x.limits) & 
      !is.numeric(object$y.limits)){
@@ -246,8 +263,9 @@ add.LonLatMap <- function (object = trellis.last.object(),
       recolor.map <- RColorBrewer::brewer.pal(9, recolor.map)
     #make an intensity scale
     temp <- apply(col2rgb(map$myTile), 2, prod)
-    temp <- level.colors(temp, pretty(temp, 200), colorRampPalette(recolor.map)(200))
-    map$myTile <- as.raster(matrix(temp, ra[1], ra[2], byrow=TRUE))
+    temp <- lattice::level.colors(temp, pretty(temp, 200), 
+                                  grDevices::colorRampPalette(recolor.map)(200))
+    map$myTile <- grDevices::as.raster(matrix(temp, ra[1], ra[2], byrow=TRUE))
     #reset cols in frame
     #map$myTile <- level.colors(temp, pretty(temp, 200), colorRampPalette(recolor.map)(200))
     #dim(map$myTile) <- ra[1:2]
@@ -303,7 +321,7 @@ add.LonLatMap <- function (object = trellis.last.object(),
 
   map.axis.comps <- axis.components.loaMap(map)
   map.axis <- function(components, ...) 
-    axis.default(components = map.axis.comps, ...)
+    lattice::axis.default(components = map.axis.comps, ...)
   object <- update(object,  panel=panel.with.map,
                 aspect = map$aspect, 
                 axis = map.axis)
@@ -327,10 +345,14 @@ add.LonLatMap <- function (object = trellis.last.object(),
 #add_loaPanel
 ########################
 
-add_lonLatPanel <- function(lattice.plot=trellis.last.object(),
+add_lonLatPanel <- function(lattice.plot=NULL,
                          preprocess = NULL,
                          panel =NULL, postprocess = NULL,
                       ...){
+  #use last lattice plot if nothing sent
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   x.args <- list(...)
   if(!is.null(preprocess)) 
     lattice.plot <- do.call(preprocess, listUpdate(x.args,

@@ -78,13 +78,13 @@ panel.compareZcases <- function (x=x, y=y, z=NULL, ..., loa.settings = FALSE)
             y1 <- if(i>1)
                     c(y1, rev(z[extra.args$zcases == extra.args$zcase.ids[i-1]]))
                        else c(y1, rev(y))
-            do.call(panel.polygon, listUpdate(extra.args, list(x=x1, y=y1, col=extra.args$col[i+1], alpha=0.1, border=FALSE)))
+            do.call(lattice::panel.polygon, listUpdate(extra.args, list(x=x1, y=y1, col=extra.args$col[i+1], alpha=0.1, border=FALSE)))
         }
         for(i in (temp-1):1){
             y1 <- z[extra.args$zcases == extra.args$zcase.ids[i]]
-            do.call(panel.lines, listUpdate(extra.args, list(x=x, y=y1, col=extra.args$col[i+1])))
+            do.call(lattice::panel.lines, listUpdate(extra.args, list(x=x, y=y1, col=extra.args$col[i+1])))
         }
     }
-    do.call(panel.lines, listUpdate(extra.args, list(x=x, y=y, col=extra.args$col[1])))
+    do.call(lattice::panel.lines, listUpdate(extra.args, list(x=x, y=y, col=extra.args$col[1])))
 }
 

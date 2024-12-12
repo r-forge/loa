@@ -76,9 +76,10 @@ loaMapPlot <- function(x, data = NULL, panel = panel.loaPlot, map = NULL,
     if(length(recolor.map) == 1)
       recolor.map <- RColorBrewer::brewer.pal(9, recolor.map)
     #make an intensity scale
-    temp <- apply(col2rgb(map$myTile), 2, prod)
-    temp <- level.colors(temp, pretty(temp, 200), colorRampPalette(recolor.map)(200))
-    map$myTile <- as.raster(matrix(temp, ra[1], ra[2], byrow=TRUE))
+    temp <- apply(grDevices::col2rgb(map$myTile), 2, prod)
+    temp <- lattice::level.colors(temp, pretty(temp, 200), 
+                                  grDevices::colorRampPalette(recolor.map)(200))
+    map$myTile <- grDevices::as.raster(matrix(temp, ra[1], ra[2], byrow=TRUE))
     #reset cols in frame
     #map$myTile <- level.colors(temp, pretty(temp, 200), colorRampPalette(recolor.map)(200))
     #dim(map$myTile) <- ra[1:2]
@@ -133,7 +134,7 @@ loaMapPlot <- function(x, data = NULL, panel = panel.loaPlot, map = NULL,
     }
     map.axis.comps <- axis.components.loaMap(map)
     map.axis <- function(components, ...) 
-      axis.default(components = map.axis.comps, ...)
+      lattice::axis.default(components = map.axis.comps, ...)
     ans <- update(ans, panel = panel.with.map, aspect = map$aspect, 
                   axis = map.axis)
     ans$panel.args.common$map <- map
@@ -221,7 +222,7 @@ panel.loaBGMapPlot <- panel.OSMapPlot <- function(map){
   height <- (ylim[2] - ylim[1]) / ra[1]
   #could replace panel.rect with grid::grid.panel?
   #might be faster? 
-  panel.rect(x = map.lon, y = map.lat,
+  lattice::panel.rect(x = map.lon, y = map.lat,
              width = width, height = height,
              col = map.col, border = map.col)
 }
@@ -271,7 +272,7 @@ getOSMapArg <- function(ylim, xlim, ..., lim.borders = 0.1){
   #might want to document source and supplier??? 
   mymap <- list(lat.center=mean(ylim, na.rm=TRUE), 
                 lon.center=mean(xlim, na.rm=TRUE),
-                zoom = MaxZoom(xlim, ylim), 
+                zoom = RgoogleMaps::MaxZoom(xlim, ylim), 
                 myTile = as.raster(mytile),
                 BBOX = list(ll=c(lat=ylim[1], lon=xlim[1]),
                             ur=c(lat=ylim[2], lon=xlim[2])), 
@@ -319,7 +320,7 @@ getRGMapArg <- function(ylim, xlim, ..., lim.borders = 0.1){
                    names(formals(GetMap.bbox)),
                    names(formals(GetMap))))
   #get suitable ranges
-  temp2 <- try(qbbox(lat = ylim, lon = xlim), silent = TRUE)
+  temp2 <- try(RgoogleMaps::qbbox(lat = ylim, lon = xlim), silent = TRUE)
   if(is(temp2)[1] == "try-error")
     stop(paste("\tCould not apply supplied lat, lon combination",
                "\n\t[check call settings and data source]", sep = ""),
@@ -345,7 +346,7 @@ getRGMapArg <- function(ylim, xlim, ..., lim.borders = 0.1){
   ##update my defaults with relevant ones in call
   map <- listUpdate(map, extra.args, use.b = temp)
   #use MapBackground and list of allowed args
-  map <- try(do.call(GetMap.bbox, map), silent = TRUE)
+  map <- try(do.call(RgoogleMaps::GetMap.bbox, map), silent = TRUE)
   #can't use nativeRaster at moment 
   if("nativeRaster" %in% class(map$myTile)){
     #png native output
@@ -388,13 +389,19 @@ makeMapArg <- function(...) getRGMapArg(...)
 
 #local gets
 
-loaMapArg <- function(object = trellis.last.object()){
+loaMapArg <- function(object = NULL){
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   #recovers map from previous loa Map plot
   object$panel.args.common$map
 }
 
 #old name 
-getMapArg <- function(object = trellis.last.object()){
+getMapArg <- function(object = NULL){
+  if(is.null(object)){
+    object <- lattice::trellis.last.object()
+  }
   #recovers map from previous loa Map plot
   object$panel.args.common$map
 }

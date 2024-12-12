@@ -122,12 +122,13 @@ panel.loaLevelPlot <- function (x = NULL, y = NULL, z = NULL,
 #loa colHandler handling of colours
 
 
-panel.loaLevelPlotRaster <- function (x, y, z, subscripts, at = pretty(z), ..., col.regions = regions$col, 
-    alpha.regions = regions$alpha, interpolate = FALSE, identifier = "levelplot") 
+panel.loaLevelPlotRaster <- function (x, y, z, subscripts, at = pretty(z), ..., 
+    col.regions = regions$col, alpha.regions = regions$alpha, 
+    interpolate = FALSE, identifier = "levelplot") 
 {
     if (length(subscripts) == 0) 
         return()
-    regions <- trellis.par.get("regions")
+    regions <- lattice::trellis.par.get("regions")
     x.is.factor <- is.factor(x)
     y.is.factor <- is.factor(y)
     x <- as.numeric(x)
@@ -189,10 +190,10 @@ panel.loaLevelPlotRaster <- function (x, y, z, subscripts, at = pretty(z), ..., 
     id <- idy + nrows * (idx - 1L)
     zmat[id] <- zcol
     dim(zmat) <- c(nrows, ncolumns)
-    grid.raster(as.raster(zmat), interpolate = interpolate, x = xlow, 
+    grid::grid.raster(grDevices::as.raster(zmat), interpolate = interpolate, x = xlow, 
         y = ylow, width = xhigh - xlow, height = yhigh - ylow, 
         just = c("left", "bottom"), default.units = "native", 
-        name = trellis.grobname(paste(identifier, "raster", sep = "."), 
+        name = lattice::trellis.grobname(paste(identifier, "raster", sep = "."), 
             type = "panel", group = group))
 }
 
@@ -236,7 +237,7 @@ panel.surfaceSmooth <- function (x = NULL, y = NULL, z = NULL,
     } else {
         process.args <- unique(names(formals(smooth.fun)))
     }
-    plot.args <- unique(names(formals(panel.levelplot)))
+    plot.args <- unique(names(formals(lattice::panel.levelplot)))
 
 ############################
 
@@ -348,7 +349,7 @@ panel.surfaceSmooth <- function (x = NULL, y = NULL, z = NULL,
 
 
         if (too.far > 0) {
-            ex.tf <- exclude.too.far(mod$x, mod$y, ghosts$x, 
+            ex.tf <- mgcv::exclude.too.far(mod$x, mod$y, ghosts$x, 
                 ghosts$y, dist = too.far)
             mod$z[ex.tf] <- NA
         }
@@ -472,7 +473,7 @@ panel.kernelDensity <- function (x, y, z = NULL, ...,
 #here mylist has x and y unchanged... I think...
 
         if (too.far > 0) {
-             ex.tf <- exclude.too.far(kern.in$x, kern.in$y, mylist$x, 
+             ex.tf <- mgcv::exclude.too.far(kern.in$x, kern.in$y, mylist$x, 
                  mylist$y, dist = too.far)
              kern.in$z[ex.tf] <- NA
          }
@@ -533,7 +534,7 @@ panel.kernelDensity <- function (x, y, z = NULL, ...,
 #contour col
 
         if (!"col" %in% names(extra.args)) 
-            extra.args$col <- trellis.par.get("dot.symbol")$col
+            extra.args$col <- lattice::trellis.par.get("dot.symbol")$col
         extra.args$col <- colHandler(1, col=extra.args$col, alpha.regions=extra.args$alpha)
 
 #        extra.args$alpha <- NULL
@@ -766,7 +767,7 @@ panel.binPlot <- function(x = NULL, y = NULL, z = NULL,
 #think about passing lty, etc. 
 #for border line properties 
         
-        lrect(x1, y1, x2, y2, col=col, border=extra.args$border )#, alpha=extra.args$alpha)
+        lattice::lrect(x1, y1, x2, y2, col=col, border=extra.args$border )#, alpha=extra.args$alpha)
 
 
 #        for(i in 1:length(x1)){
