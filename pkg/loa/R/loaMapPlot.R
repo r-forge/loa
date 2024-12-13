@@ -316,9 +316,9 @@ getRGMapArg <- function(ylim, xlim, ..., lim.borders = 0.1){
     
   #get map
   #get names of args that MapBackground can handle
-  temp <- unique(c(names(formals(MapBackground)), 
-                   names(formals(GetMap.bbox)),
-                   names(formals(GetMap))))
+  temp <- unique(c(names(formals(RgoogleMaps::MapBackground)), 
+                   names(formals(RgoogleMaps::GetMap.bbox)),
+                   names(formals(RgoogleMaps::GetMap))))
   #get suitable ranges
   temp2 <- try(RgoogleMaps::qbbox(lat = ylim, lon = xlim), silent = TRUE)
   if(is(temp2)[1] == "try-error")

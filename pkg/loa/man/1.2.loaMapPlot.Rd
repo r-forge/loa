@@ -356,26 +356,10 @@ quickMap <- function(lat, lon, show.data = FALSE, ...){
 }
 
 ## Example 2
-## Off-line GoogleMap examples
+## Off-line loaMapPlot example:
 
-#  Use a subsample of lat.lon.meuse
-temp <- lat.lon.meuse[sample(1:155, 15),]
-
-RgoogleMapsPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"), 
-          data=temp, map=roadmap.meuse)
-
-RgoogleMapsPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"),
-          panel=panel.binPlot, 
-          data=temp, map=roadmap.meuse)
-
-RgoogleMapsPlot(cadmium*50+copper*10+lead*2+zinc~latitude*longitude, 
-          col.regions=c("grey", "darkred"), 
-          key.z.main="Concentrations", panel.zcases = TRUE,
-          data=temp, map=roadmap.meuse)
-
-RgoogleMapsPlot(cadmium*50+copper*10+lead*2+zinc~latitude*longitude, 
-          col.regions=c("grey", "darkred"), panel=panel.zcasePiePlot,
-          data=temp, map=roadmap.meuse)
+loaMapPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"), 
+           data=lat.lon.meuse, map=roadmap.meuse)
 
 #  Note 1:
 #  Here, the map argument is supplied so example works off-line. 
@@ -383,16 +367,38 @@ RgoogleMapsPlot(cadmium*50+copper*10+lead*2+zinc~latitude*longitude,
 #  from either Google or OpenStreetMap API. Repeat any of above 
 #  without map argument   when on-line. For example:
 \dontrun{
-   RgoogleMapsPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"), 
-             data=lat.lon.meuse)}
+loaMapPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"), 
+           data=lat.lon.meuse)}
 #  (The map will appear slightly different because non-default 
 #  size and maptype settings were used to make roadmap.meuse. See 
 #  ?roadmap.meuse for details.)  
 
 #  Note 2:
 #  To make a map for use with panel.loaBGMapPlotRaster or panel.loaBGMapPlotRaster  
-#  without plotting use makeRGMapArg() or makeRGMapArg(). 
-#  To recover a map from a previously plotted loa MapPloy use loaMapArg().
+#  without plotting use makeRGMapArg() or makeOSMapArg(). 
+#  To recover a map from a previously plotted loa MapPloy use loaMapArg(). 
+
+#  Note 3:
+#  Other example loaMapPlots (also not run):   
+#  using panel.binPlot to change data layer
+\dontrun{
+loaMapPlot(zinc~latitude*longitude, col.regions=c("grey", "darkred"),
+           panel=panel.binPlot, data=lat.lon.meuse)}
+#  using zcase panelling to handle multiple z terms 
+\dontrun{
+loaMapPlot(cadmium*50+copper*10+lead*2+zinc~latitude*longitude, 
+           col.regions=c("grey", "darkred"), key.z.main="Concentrations", 
+           panel.zcases = TRUE, data=lat.lon.meuse)}
+#   using a specialist panel to handle multiple z terms 
+#   (Please note: This will take a while...)
+\dontrun{
+loaMapPlot(cadmium*50+copper*10+lead*2+zinc~latitude*longitude, 
+           col.regions=c("grey", "darkred"), panel=panel.zcasePiePlot,
+           data=lat.lon.meuse)}
+
+#  Note 4: 
+#  For all maps generated in above examples, the Map layer is 
+#  (c) OpenStreetMap contributors
 
 }
 
