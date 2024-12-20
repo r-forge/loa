@@ -34,7 +34,7 @@ panel.loaLevelPlot <- function (x = NULL, y = NULL, z = NULL,
         return(list(group.args = c("col"), 
                     zcase.args = c("pch"), 
                     ##common.args = c(), 
-                    default.settings = list(key.fun = "draw.loaColorKey", 
+                    default.settings = list(key.fun = draw.loaColorKey, 
                                             region = TRUE, contour = TRUE, 
                                             lim.borders = 0.05, key.raster = TRUE,
                                             isolate.col.regions = TRUE,
@@ -89,7 +89,7 @@ panel.loaLevelPlot <- function (x = NULL, y = NULL, z = NULL,
                        extra.args$labels <- if ("col" %in% names(extra.args)) 
                                                 list(col = extra.args$col)
                                                 else TRUE
-                   do.call(panel.levelplot, extra.args)
+                   do.call(lattice::panel.levelplot, extra.args)
                  }
       if(isGood4LOA(temp)) {
            temp <- if(is.list(temp)) 
@@ -440,7 +440,7 @@ panel.kernelDensity <- function (x, y, z = NULL, ...,
         return(list(process.args = process.args, 
                     plot.args = plot.args,
                     group.args = c("col"),
-                    default.settings = list(key.fun = "draw.loaColorRegionsKey", 
+                    default.settings = list(key.fun = draw.loaColorRegionsKey, 
                                             key.raster = TRUE, 
                                             isolate.col.regions = TRUE,
                                             scheme="loa.scheme")))
@@ -586,9 +586,12 @@ panel.binPlot <- function(x = NULL, y = NULL, z = NULL,
     if(loa.settings)
         return(list(group.args= c("col"),
                     zcase.args= c("pch"),
-                    common.args = c("breaks", "pad.grid", "x.breaks", "y.breaks", "statistics"),
-                    default.settings = list(key.fun = "draw.loaColorKey", key.raster = TRUE, 
-                                            x.elements = c("x", "x1", "x2"), isolate.col.regions = TRUE,
+                    common.args = c("breaks", "pad.grid", "x.breaks", 
+                                    "y.breaks", "statistics"),
+                    default.settings = list(key.fun = draw.loaColorKey, 
+                                            key.raster = TRUE, 
+                                            x.elements = c("x", "x1", "x2"), 
+                                            isolate.col.regions = TRUE,
                                             scheme="loa.scheme")))
 
     extra.args <- list(...)

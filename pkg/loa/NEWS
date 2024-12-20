@@ -1,7 +1,14 @@
+Changes in loa 0.3.1 [2024-12-20]
+==================================
+
+*       loa 0.3.0 rebuild 
+
 Changes in loa 0.3.0 [2024-12-12]
 ==================================
 
 *       Moved lattice from depends to imports 
+*       some updates to panel... and draw... functions for use 
+        in loa::fun() calls
 
 Changes in loa 0.2.49 [2024-12-11]
 ==================================
