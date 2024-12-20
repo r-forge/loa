@@ -30,7 +30,7 @@ panel.kernelDensity(x, y, z = NULL, ..., n = 20,
 panel.binPlot(x = NULL, y = NULL, z = NULL, 
          breaks=20, x.breaks = breaks, y.breaks = breaks,
          x1=NULL, x2=NULL, y1=NULL, y2=NULL,
-         statistic = mean, pad.grid = FALSE, ...,
+         statistic = NULL, pad.grid = FALSE, ...,
          plot = TRUE, process = TRUE, loa.settings = FALSE)
 
 }

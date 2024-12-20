@@ -559,7 +559,7 @@ panel.kernelDensity <- function (x, y, z = NULL, ...,
 panel.binPlot <- function(x = NULL, y = NULL, z = NULL, 
          breaks=20, x.breaks = breaks, y.breaks = breaks,
          x1=NULL, x2=NULL, y1=NULL, y2=NULL,
-         statistic = mean, pad.grid = FALSE, ...,
+         statistic = NULL, pad.grid = FALSE, ...,
          plot = TRUE, process = TRUE, loa.settings = FALSE 
          ){
 
@@ -595,7 +595,9 @@ panel.binPlot <- function(x = NULL, y = NULL, z = NULL,
                                             scheme="loa.scheme")))
 
     extra.args <- list(...)
-    
+    if(is.null(statistic)){
+      statistic <- function(x) { mean(x, na.rm=TRUE)}
+    }
    
 
 

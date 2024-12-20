@@ -1,7 +1,7 @@
 Package: loa
 Type: Package
 Title: Lattice Options and Add-Ins
-Version: 0.3.1.0
+Version: 0.3.1.1
 Date: 2024-12-20
 Authors@R: c(person(given = "Karl", family = "Ropkins", role = c("aut", "cre"), email =
          "karl.ropkins@gmail.com", comment = c(ORCID = "0000-0002-0294-6997")))
